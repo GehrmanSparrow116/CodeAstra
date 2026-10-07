@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Outbreak Early Warning System</title>
+    <!-- Use Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --glass-bg: rgba(30, 41, 59, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #38bdf8;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --success: #10b981;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(129, 140, 248, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(239, 68, 68, 0.1) 0px, transparent 50%);
+            background-attachment: fixed;
+            color: var(--text-main);
+            min-height: 100vh;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: fadeInDown 0.8s ease;
+        }
+        
+        header h1 {
+            font-weight: 800;
+            font-size: 2.5rem;
+            margin: 0;
+            background: -webkit-linear-gradient(45deg, var(--accent), #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 24px;
+            max-width: 1400px;
+            margin: 0 auto;
+            align-items: start;
+        }
+        
+        @media (max-width: 900px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .glass-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 30px;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            box-shadow: 0 10px 40px -10px rgba(0,0,0,0.5);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: fadeInUp 0.8s ease forwards;
+            opacity: 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+        }
+        
+        .glass-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px -10px rgba(0,0,0,0.6);
+            border-color: rgba(255,255,255,0.2);
+        }
+
+        .card-header {
+            font-size: 1.1rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .stat-value {
+            font-size: 4.5rem;
+            font-weight: 800;
+            margin: 15px 0;
+            background: -webkit-linear-gradient(45deg, #f8fafc, var(--text-muted));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+        }
+
+        /* Alerts styling */
+        .alert-item {
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            background: rgba(239, 68, 68, 0.05);
+            border-left: 4px solid var(--danger);
+            transition: transform 0.2s ease;
+        }
+        
+        .alert-item:hover {
+            transform: translateX(5px);
+        }
+        
+        .alert-item.critical {
+            background: rgba(239, 68, 68, 0.15);
+            border-left: 6px solid var(--danger);
+            box-shadow: inset 0 0 20px rgba(239, 68, 68, 0.1);
+            animation: pulse-danger 2s infinite;
+        }
+        
+        .alert-item.high {
+            background: rgba(245, 158, 11, 0.1);
+            border-left: 4px solid var(--warning);
+        }
+
+        .alert-title {
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+        
+        .alert-reason {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* Table styling */
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 8px;
+        }
+        
+        th, td {
+            padding: 16px;
+            text-align: left;
+        }
+        
+        th {
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            border-bottom: 1px solid var(--glass-border);
+        }
+        
+        tbody tr {
+            background: rgba(255,255,255,0.02);
+            transition: background 0.2s ease, transform 0.2s ease;
+            border-radius: 8px;
+        }
+        
+        tbody tr:hover {
+            background: rgba(255,255,255,0.06);
+            transform: scale(1.01);
+        }
+        
+        tbody td:first-child { border-top-left-radius: 8px; border-bottom-left-radius: 8px; }
+        tbody td:last-child { border-top-right-radius: 8px; border-bottom-right-radius: 8px; }
+        
+        .badge {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+        
+        .badge.critical { background: rgba(239,68,68,0.2); color: #fca5a5; border: 1px solid rgba(239,68,68,0.3); }
+        .badge.high { background: rgba(245,158,11,0.2); color: #fcd34d; border: 1px solid rgba(245,158,11,0.3); }
+        .badge.moderate { background: rgba(59,130,246,0.2); color: #93c5fd; border: 1px solid rgba(59,130,246,0.3); }
+        .badge.low { background: rgba(16,185,129,0.2); color: #6ee7b7; border: 1px solid rgba(16,185,129,0.3); }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes pulse-danger {
+            0% { box-shadow: inset 0 0 10px rgba(239, 68, 68, 0.05); }
+            50% { box-shadow: inset 0 0 25px rgba(239, 68, 68, 0.25); }
+            100% { box-shadow: inset 0 0 10px rgba(239, 68, 68, 0.05); }
+        }
+
+        /* Delay cascade for cards */
+        .glass-card:nth-child(1) { animation-delay: 0.1s; }
+        .glass-card:nth-child(2) { animation-delay: 0.2s; }
+        .glass-card:nth-child(3) { animation-delay: 0.3s; }
+        .glass-card:nth-child(4) { animation-delay: 0.4s; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Health Outbreak Early Warning System</h1>
+        <p style="color: var(--text-muted);" id="current-period">Loading Data...</p>
+    </header>
+
+    <div class="dashboard-grid">
+        <!-- Summary Stats -->
+        <div class="glass-card" style="grid-column: 1; grid-row: 1;">
+            <div class="card-header">Total Monitored Cases</div>
+            <div class="stat-value" id="total-cases">--</div>
+            <canvas id="diseaseChart" height="200"></canvas>
+        </div>
+
+        <!-- Hotspots Risk Map (Table proxy) -->
+        <div class="glass-card" style="grid-column: 2; grid-row: 1;">
+            <div class="card-header">Regional Risk & Predictions</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Location</th>
+                        <th>Risk Level</th>
+                        <th>EWS (N2)</th>
+                        <th>Predicted Next Wk (N4)</th>
+                    </tr>
+                </thead>
+                <tbody id="risk-table-body">
+                    <tr><td colspan="4">Loading data...</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Explainable AI Panel (Fills the blank space) -->
+        <div class="glass-card" style="grid-column: 2; grid-row: 2;">
+            <div class="card-header">AI Insights & Recommendations (N3 & N5)</div>
+            <div id="ai-insights-container" style="display: grid; gap: 15px; max-height: 400px; overflow-y: auto; padding-right: 10px;">
+                <p>Analyzing signals...</p>
+            </div>
+        </div>
+
+        <!-- Alerts Panel -->
+        <div class="glass-card" style="grid-column: 1; grid-row: 2;">
+            <div class="card-header">Active Alerts & Warnings</div>
+            <div id="alerts-container">
+                <p>Loading alerts...</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function fetchDashboardData() {
+            try {
+                const res = await fetch('/api/dashboard');
+                const data = await res.json();
+                
+                document.getElementById('current-period').innerText = `Data period: ${data.current_period}`;
+                document.getElementById('total-cases').innerText = data.summary.total_cases.toLocaleString();
+                
+                // Render Chart
+                const diseaseNames = Object.keys(data.summary.cases_by_disease);
+                const diseaseCases = Object.values(data.summary.cases_by_disease);
+                
+                new Chart(document.getElementById('diseaseChart'), {
+                    type: 'doughnut',
+                    data: {
+                        labels: diseaseNames,
+                        datasets: [{
+                            data: diseaseCases,
+                            backgroundColor: ['#ef4444', '#f59e0b', '#38bdf8', '#818cf8', '#10b981'],
+                            borderWidth: 0
+                        }]
+                    },
+                    options: {
+                        plugins: { legend: { position: 'bottom', labels: { color: '#f8fafc' } } },
+                        cutout: '70%'
+                    }
+                });
+
+                // Render Alerts (Limit to top 3 for cleaner UI)
+                const alertsContainer = document.getElementById('alerts-container');
+                alertsContainer.innerHTML = '';
+                
+                if(data.alerts.length === 0) {
+                    alertsContainer.innerHTML = '<p style="color:var(--success)">No active alerts. All regions stable.</p>';
+                } else {
+                    const topAlerts = data.alerts.slice(0, 3);
+                    topAlerts.forEach(alert => {
+                        const alertClass = alert.risk_level.toLowerCase();
+                        alertsContainer.innerHTML += `
+                            <div class="alert-item ${alertClass}">
+                                <div class="alert-title">
+                                    <span>${alert.location} - ${alert.disease}</span>
+                                    <span class="badge ${alertClass}">${alert.risk_level}</span>
+                                </div>
+                                <div class="alert-reason">${alert.reason}</div>
+                            </div>
+                        `;
+                    });
+                    if (data.alerts.length > 3) {
+                         alertsContainer.innerHTML += `<div style="text-align:center; color:var(--text-muted); font-size:0.9rem; margin-top:10px;">+ ${data.alerts.length - 3} more alerts</div>`;
+                    }
+                }
+
+                // Render Risk Table & AI Insights
+                const tbody = document.getElementById('risk-table-body');
+                const aiContainer = document.getElementById('ai-insights-container');
+                tbody.innerHTML = '';
+                aiContainer.innerHTML = '';
+                
+                data.risk_assessment.forEach(risk => {
+                    const badgeClass = risk.risk_level.toLowerCase();
+                    
+                    // Risk Table (N2, N4)
+                    tbody.innerHTML += `
+                        <tr>
+                            <td style="font-weight:600">${risk.location}</td>
+                            <td><span class="badge ${badgeClass}">${risk.risk_level}</span></td>
+                            <td style="font-family:monospace; font-weight:800; color:var(--accent)">${risk.ews_score}/100</td>
+                            <td>~${risk.predicted_cases_next_week} cases</td>
+                        </tr>
+                    `;
+                    
+                    // AI Insights (N3, N5)
+                    if (risk.risk_level === 'CRITICAL' || risk.risk_level === 'HIGH') {
+                        aiContainer.innerHTML += `
+                            <div style="background: rgba(255,255,255,0.03); padding: 15px; border-radius: 8px; border-left: 3px solid var(--accent);">
+                                <h4 style="margin: 0 0 10px 0; color: var(--text-main);">${risk.location}</h4>
+                                <div style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 8px;">
+                                    <strong>Risk Drivers:</strong> ${risk.explanations.join(', ')}
+                                </div>
+                                <div style="font-size: 0.9rem; color: #6ee7b7;">
+                                    <strong>Recommended Action:</strong> ${risk.recommendations[0]}
+                                </div>
+                            </div>
+                        `;
+                    }
+                });
+                
+                if(aiContainer.innerHTML === '') {
+                     aiContainer.innerHTML = '<p style="color:var(--success)">No critical insights needed. Regions stable.</p>';
+                }
+
+            } catch(e) {
+                console.error("Failed to load data", e);
+                document.getElementById('alerts-container').innerHTML = `<p style="color:var(--danger)">Error loading data.</p>`;
+            }
+        }
+
+        window.onload = fetchDashboardData;
+    </script>
+</body>
+</html>
