@@ -1,0 +1,380 @@
+/**
+ * CodeAstra — Health Intelligence Platform
+ * File: css/hero-animation.css
+ * Description: Styling for the 3D Health Intelligence Engine Hero Visual, Floating Data Nodes,
+ * ECG Signal Waveforms, Interactive Inspection Panels, and Pipeline Animations.
+ */
+
+/* Hero Stage Layout */
+.hero-3d-stage {
+  position: relative;
+  width: 100%;
+  height: 520px;
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 24px;
+  background: radial-gradient(circle at center, rgba(37, 99, 235, 0.04) 0%, rgba(248, 250, 252, 0.6) 70%, transparent 100%);
+  overflow: visible;
+}
+
+#hero-three-canvas-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: auto;
+}
+
+#hero-three-canvas-container canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+  outline: none;
+}
+
+/* 2D HTML Floating Overlay Badges Synced to 3D Nodes */
+.hero-node-badge {
+  position: absolute;
+  z-index: 10;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  border-radius: 12px;
+  padding: 6px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+  white-space: nowrap;
+}
+
+.hero-node-badge:hover {
+  transform: translate(-50%, -54%) scale(1.06);
+  box-shadow: 0 10px 25px rgba(37, 99, 235, 0.2), 0 2px 6px rgba(0, 0, 0, 0.06);
+  border-color: #93c5fd;
+  z-index: 25;
+}
+
+.hero-node-badge.active-pulse {
+  animation: nodePulseGlow 1.2s ease-out;
+}
+
+@keyframes nodePulseGlow {
+  0% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.6); }
+  70% { box-shadow: 0 0 0 14px rgba(37, 99, 235, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
+}
+
+.node-icon-pill {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+.node-icon-pill.blue { background: #eff6ff; color: #2563eb; }
+.node-icon-pill.red { background: #fef2f2; color: #ef4444; }
+.node-icon-pill.orange { background: #fff7ed; color: #f97316; }
+.node-icon-pill.yellow { background: #fefce8; color: #ca8a04; }
+.node-icon-pill.teal { background: #ecfdf5; color: #059669; }
+.node-icon-pill.purple { background: #f5f3ff; color: #7c3aed; }
+
+.node-text-group {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.node-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--landing-text-muted);
+}
+
+.node-value {
+  font-size: 0.84rem;
+  font-weight: 800;
+  color: var(--landing-navy);
+}
+
+/* Central Core Interactive Overlay Label */
+.hero-core-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 15;
+  text-align: center;
+  pointer-events: auto;
+  cursor: pointer;
+  padding: 10px 16px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(191, 219, 254, 0.8);
+  box-shadow: 0 4px 20px rgba(37, 99, 235, 0.15);
+  transition: all 0.3s ease;
+}
+
+.hero-core-label:hover {
+  transform: translate(-50%, -52%) scale(1.05);
+  box-shadow: 0 8px 28px rgba(37, 99, 235, 0.3);
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.core-brand-name {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  font-size: 0.95rem;
+  color: var(--landing-blue);
+  letter-spacing: 0.04em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.core-subtitle {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--landing-navy);
+}
+
+.core-pulse-hint {
+  font-size: 0.62rem;
+  color: var(--landing-text-muted);
+  margin-top: 2px;
+}
+
+/* Floating Mini Telemetry Cards around Hero */
+.hero-floating-card {
+  position: absolute;
+  z-index: 12;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(10px);
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 10px 14px;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  pointer-events: none;
+  animation: floatGentle 4s ease-in-out infinite alternate;
+}
+
+.hero-floating-card.card-top-left {
+  top: 12px;
+  left: -10px;
+  animation-delay: 0s;
+}
+
+.hero-floating-card.card-bottom-right {
+  bottom: 15px;
+  right: -5px;
+  animation-delay: 1.5s;
+}
+
+@keyframes floatGentle {
+  0% { transform: translateY(0px); }
+  100% { transform: translateY(-8px); }
+}
+
+.floating-card-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--landing-text-muted);
+}
+
+.floating-card-metric {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--landing-navy);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.floating-card-sub {
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+/* Interactive Node Detail Tooltip Modal */
+.node-detail-panel {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  opacity: 0;
+  pointer-events: none;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 14px;
+  padding: 12px 16px;
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.16);
+  z-index: 40;
+  width: 90%;
+  max-width: 380px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.node-detail-panel.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.panel-title {
+  font-weight: 800;
+  font-size: 0.9rem;
+  color: var(--landing-navy);
+}
+
+.panel-close-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--landing-text-muted);
+  display: flex;
+  align-items: center;
+}
+
+.panel-body-text {
+  font-size: 0.8rem;
+  color: var(--landing-text-body);
+  line-height: 1.4;
+}
+
+.panel-stats-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 8px;
+  padding-top: 6px;
+  border-top: 1px solid #f1f5f9;
+  font-size: 0.75rem;
+}
+
+/* Statistics Counter Section */
+.landing-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  max-width: var(--landing-max-width);
+  margin: -2.5rem auto 4rem;
+  padding: 0 1.5rem;
+  position: relative;
+  z-index: 5;
+}
+
+.stat-metric-card {
+  background: #ffffff;
+  border: 1px solid var(--landing-border);
+  border-radius: 16px;
+  padding: 22px 20px;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.05);
+  text-align: center;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.stat-metric-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.1);
+  border-color: #bfdbfe;
+}
+
+.stat-number {
+  font-family: 'Outfit', sans-serif;
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--landing-navy);
+  line-height: 1.1;
+  margin-bottom: 4px;
+}
+
+.stat-label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--landing-blue);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.stat-caption {
+  font-size: 0.75rem;
+  color: var(--landing-text-muted);
+  margin-top: 2px;
+}
+
+/* WebGL Fallback Container */
+.webgl-fallback-container {
+  display: none;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 20px;
+  text-align: center;
+}
+
+/* Mobile Responsiveness for 3D Hero */
+@media (max-width: 992px) {
+  .hero-3d-stage {
+    height: 440px;
+    margin-top: 1.5rem;
+  }
+  .landing-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    margin-top: 2rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-3d-stage {
+    height: 380px;
+  }
+  .hero-node-badge {
+    padding: 4px 8px;
+  }
+  .node-label {
+    font-size: 0.6rem;
+  }
+  .node-value {
+    font-size: 0.74rem;
+  }
+  .landing-stats-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .stat-number {
+    font-size: 1.65rem;
+  }
+}

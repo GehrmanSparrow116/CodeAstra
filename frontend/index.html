@@ -4,14 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HealthPulse — Early Detection. Safer Communities.</title>
-  <meta name="description" content="HealthPulse is a health intelligence platform designed to monitor disease activity, identify emerging risks, and provide actionable health insights.">
+  <meta name="description" content="HealthPulse is an interactive health intelligence platform designed to monitor disease activity, identify emerging risks, and provide actionable early warning signals.">
 
   <!-- Google Fonts: Outfit & Inter for clean healthcare typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
+  <!-- Core Landing Page Stylesheets -->
   <link rel="stylesheet" href="css/landing.css">
+  <link rel="stylesheet" href="css/hero-animation.css">
 </head>
 <body class="landing-page">
 
@@ -35,8 +37,8 @@
         <a href="#hero">Home</a>
         <a href="#what-is-healthpulse">Platform</a>
         <a href="#how-it-works">How It Works</a>
-        <a href="#roles">For Professionals</a>
-        <a href="#roles">For Public</a>
+        <a href="#roles">Portals</a>
+        <a href="#why-healthpulse">Why HealthPulse</a>
       </nav>
 
       <div>
@@ -52,13 +54,14 @@
   <main>
 
     <!-- ====================================================================
-         1. HERO SECTION
+         1. HERO SECTION WITH THREE.JS HEALTH INTELLIGENCE VISUAL
          ==================================================================== -->
-    <section class="landing-section" id="hero">
+    <section class="landing-section" id="hero" style="padding-top: 3.5rem; padding-bottom: 2rem;">
       <div class="hero-landing-grid">
         
+        <!-- Left Hero Copy -->
         <div>
-          <div style="display:inline-flex; align-items:center; gap:0.5rem; padding:0.4rem 1rem; background:#eff6ff; color:var(--landing-blue); font-size:0.85rem; font-weight:700; border-radius:9999px; margin-bottom:1.25rem;">
+          <div class="hero-badge-pill" style="display:inline-flex; align-items:center; gap:0.5rem; padding:0.4rem 1rem; background:#eff6ff; color:var(--landing-blue); font-size:0.85rem; font-weight:700; border-radius:9999px; margin-bottom:1.25rem;">
             <i data-lucide="activity" style="width:16px;"></i> Health Outbreak Detection & Early Warning System
           </div>
 
@@ -83,47 +86,60 @@
           </div>
         </div>
 
-        <!-- HERO RIGHT UI DATA VISUALIZATION -->
-        <div class="hero-visual-container">
-          <div style="font-size:0.8rem; font-weight:700; color:var(--landing-blue); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:1.25rem;">
-            Real-Time Surveillance Pipeline
-          </div>
-
-          <div class="visual-node-flow">
-            <div class="visual-node-card">
-              <div class="visual-node-icon"><i data-lucide="activity"></i></div>
-              <div>
-                <strong style="color:var(--landing-navy); font-size:0.95rem;">Disease Activity Monitoring</strong>
-                <div style="font-size:0.825rem; color:var(--landing-text-muted);">Ingesting case signals across monitored cities</div>
-              </div>
-            </div>
-
-            <div class="visual-node-card">
-              <div class="visual-node-icon" style="color:#f59e0b;"><i data-lucide="scan-eye"></i></div>
-              <div>
-                <strong style="color:var(--landing-navy); font-size:0.95rem;">Risk & Anomaly Detection</strong>
-                <div style="font-size:0.825rem; color:var(--landing-text-muted);">Identifying trajectory spikes early</div>
-              </div>
-            </div>
-
-            <div class="visual-node-card">
-              <div class="visual-node-icon" style="color:#ef4444;"><i data-lucide="alert-triangle"></i></div>
-              <div>
-                <strong style="color:var(--landing-navy); font-size:0.95rem;">Early Warning Intelligence</strong>
-                <div style="font-size:0.825rem; color:var(--landing-text-muted);">Generating automated threshold advisories</div>
-              </div>
-            </div>
-
-            <div class="visual-node-card" style="background:#eff6ff; border-color:#bfdbfe;">
-              <div class="visual-node-icon" style="color:#10b981;"><i data-lucide="shield-check"></i></div>
-              <div>
-                <strong style="color:var(--landing-navy); font-size:0.95rem;">Public Awareness & Action</strong>
-                <div style="font-size:0.825rem; color:var(--landing-text-muted);">Empowering communities with preventive guidance</div>
-              </div>
+        <!-- Right Hero 3D Interactive Visual Stage -->
+        <div class="hero-3d-stage">
+          
+          <!-- Floating Mini Telemetry Cards -->
+          <div class="hero-floating-card card-top-left">
+            <span class="floating-card-label">Case Activity</span>
+            <div class="floating-card-metric">
+              <span style="color:var(--landing-blue);">↑ 12.4%</span>
+              <span class="floating-card-sub" style="color:#2563eb;">Increasing</span>
             </div>
           </div>
+
+          <div class="hero-floating-card card-bottom-right">
+            <span class="floating-card-label">Early Warning Index</span>
+            <div class="floating-card-metric">
+              <span style="color:#ef4444;">78 / 100</span>
+              <span class="floating-card-sub" style="color:#dc2626; font-size:0.68rem; background:#fef2f2; padding:2px 6px; border-radius:4px;">HIGH RISK</span>
+            </div>
+          </div>
+
+          <!-- Three.js Canvas Container -->
+          <div id="hero-three-canvas-container"></div>
+
         </div>
 
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         PLATFORM STATISTICS COUNT-UP SECTION
+         ==================================================================== -->
+    <section class="landing-stats-grid">
+      <div class="stat-metric-card">
+        <div class="stat-number" data-countup="5050" data-suffix="+" data-format="locale">0</div>
+        <div class="stat-label">Health Records</div>
+        <div class="stat-caption">Multi-year epidemiological observations</div>
+      </div>
+
+      <div class="stat-metric-card">
+        <div class="stat-number" data-countup="5">0</div>
+        <div class="stat-label">Monitored Regions</div>
+        <div class="stat-caption">High-density metropolitan clusters</div>
+      </div>
+
+      <div class="stat-metric-card">
+        <div class="stat-number" data-countup="5" data-suffix=" Pathogens">0</div>
+        <div class="stat-label">Disease Coverage</div>
+        <div class="stat-caption">Dengue, Influenza, COVID-19, Cholera, Typhoid</div>
+      </div>
+
+      <div class="stat-metric-card">
+        <div class="stat-number" style="color:var(--landing-blue);">24/7</div>
+        <div class="stat-label">Continuous Simulation</div>
+        <div class="stat-caption">Real-time anomaly & EWS evaluation</div>
       </div>
     </section>
 
@@ -133,26 +149,26 @@
     <section class="landing-section" id="what-is-healthpulse">
       <div class="section-header-center">
         <h2>What is HealthPulse?</h2>
-        <p>HealthPulse transforms health-related data into understandable disease activity, regional risk information, early warning signals and actionable public health insights.</p>
+        <p>HealthPulse transforms health surveillance data into understandable disease activity, regional risk information, early warning signals, and actionable public health guidance.</p>
       </div>
 
       <div class="feature-card-grid">
         <div class="landing-card">
           <div class="landing-card-icon">🦠</div>
           <h3>Disease Monitoring</h3>
-          <p>Track disease activity and emerging outbreak patterns across monitored municipal sectors.</p>
+          <p>Track pathogen growth trajectories and emerging outbreak clusters across monitored municipal sectors.</p>
         </div>
 
         <div class="landing-card">
           <div class="landing-card-icon">📍</div>
           <h3>Regional Risk</h3>
-          <p>Understand where health risks are increasing with clear color-coded geographic maps.</p>
+          <p>Understand where health risks are accelerating with clear color-coded geographic surveillance maps.</p>
         </div>
 
         <div class="landing-card">
           <div class="landing-card-icon">⚠️</div>
           <h3>Early Warning</h3>
-          <p>Identify unusual statistical shifts and emerging risks before major surges occur.</p>
+          <p>Identify unusual statistical shifts and emerging risks before major hospitalization surges occur.</p>
         </div>
 
         <div class="landing-card">
@@ -169,7 +185,7 @@
     <section class="landing-section" style="background:#ffffff; border-top:1px solid var(--landing-border); border-bottom:1px solid var(--landing-border);">
       <div class="section-header-center">
         <h2>What HealthPulse Provides</h2>
-        <p>Comprehensive tools designed for both citizen awareness and healthcare decision-making.</p>
+        <p>Comprehensive tools designed for citizen awareness, healthcare planning, and emergency response.</p>
       </div>
 
       <div class="feature-card-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
@@ -206,7 +222,7 @@
 
         <div class="landing-card">
           <div class="landing-card-icon" style="background:#f3e8ff; color:#9333ea;"><i data-lucide="bar-chart-3"></i></div>
-          <h3>Data-Driven Insights</h3>
+          <h3>Explainable AI Insights</h3>
           <p>Plain-language explanations translating complex data into understandable public health guidance.</p>
         </div>
 
@@ -214,7 +230,7 @@
     </section>
 
     <!-- ====================================================================
-         4. HOW HEALTHPULSE WORKS
+         4. HOW HEALTHPULSE WORKS (INTERACTIVE PIPELINE STEPPER)
          ==================================================================== -->
     <section class="landing-section" id="how-it-works">
       <div class="section-header-center">
@@ -223,7 +239,7 @@
       </div>
 
       <div class="pipeline-nodes-row">
-        <div class="pipeline-node-box">
+        <div class="pipeline-node-box active-step">
           <strong style="color:var(--landing-navy); font-size:0.9rem;">DATA INGESTION</strong>
           <div style="font-size:0.75rem; color:var(--landing-text-muted);">Signals & Cases</div>
         </div>
@@ -242,18 +258,18 @@
         <div class="pipeline-arrow">→</div>
 
         <div class="pipeline-node-box">
-          <strong style="color:var(--landing-navy); font-size:0.9rem;">RISK DETECTION</strong>
-          <div style="font-size:0.75rem; color:var(--landing-text-muted);">Anomaly Scanning</div>
+          <strong style="color:var(--landing-navy); font-size:0.9rem;">ANOMALY DETECTION</strong>
+          <div style="font-size:0.75rem; color:var(--landing-text-muted);">Z-Score Scanning</div>
         </div>
         <div class="pipeline-arrow">→</div>
 
         <div class="pipeline-node-box">
-          <strong style="color:var(--landing-navy); font-size:0.9rem;">EARLY WARNING</strong>
-          <div style="font-size:0.75rem; color:var(--landing-text-muted);">Alert Generation</div>
+          <strong style="color:var(--landing-navy); font-size:0.9rem;">RISK ASSESSMENT</strong>
+          <div style="font-size:0.75rem; color:var(--landing-text-muted);">EWS Calculation</div>
         </div>
         <div class="pipeline-arrow">→</div>
 
-        <div class="pipeline-node-box" style="background:#eff6ff; border-color:#bfdbfe;">
+        <div class="pipeline-node-box">
           <strong style="color:var(--landing-blue); font-size:0.9rem;">ACTIONABLE INSIGHTS</strong>
           <div style="font-size:0.75rem; color:var(--landing-text-muted);">Public Guidance</div>
         </div>
@@ -305,7 +321,7 @@
               <li style="display:flex; align-items:center; gap:0.5rem;"><i data-lucide="check" style="color:#60a5fa; width:18px;"></i> Advanced Early Warning Score (EWS) analytics</li>
               <li style="display:flex; align-items:center; gap:0.5rem;"><i data-lucide="check" style="color:#60a5fa; width:18px;"></i> Explainable AI (XAI) feature weight analysis</li>
               <li style="display:flex; align-items:center; gap:0.5rem;"><i data-lucide="check" style="color:#60a5fa; width:18px;"></i> Predictive ML outbreak models</li>
-              <li style="display:flex; align-items:center; gap:0.5rem;"><i data-lucide="check" style="color:#60a5fa; width:18px;"></i> Raw dataset exploration & resource planning</li>
+              <li style="display:flex; align-items:center; gap:0.5rem;"><i data-lucide="check" style="color:#60a5fa; width:18px;"></i> Raw dataset exploration & multi-page command center</li>
             </ul>
           </div>
 
@@ -321,7 +337,7 @@
     <!-- ====================================================================
          6. WHY HEALTHPULSE?
          ==================================================================== -->
-    <section class="landing-section">
+    <section class="landing-section" id="why-healthpulse">
       <div class="section-header-center">
         <h2>Why HealthPulse?</h2>
         <p>Built to bridge the gap between complex health data and timely public awareness.</p>
@@ -336,7 +352,8 @@
 
         <div class="landing-card">
           <strong style="color:var(--landing-blue); font-size:0.85rem; text-transform:uppercase;">02. Clear Information</strong>
-          <p style="margin-top:0.4rem;"><strong>Understandable Insights:</strong> Convert dense epidemiological metrics into clear public health advice.</p>
+          <h3 style="margin-top:0.4rem;">Understandable Insights</h3>
+          <p>Convert dense epidemiological metrics into clear, actionable public health advice.</p>
         </div>
 
         <div class="landing-card">
@@ -413,18 +430,12 @@
     </div>
   </footer>
 
+  <!-- Scripts -->
   <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      if (typeof lucide !== 'undefined') lucide.createIcons();
-
-      if (typeof gsap !== 'undefined' && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        gsap.from('.hero-heading', { opacity: 0, y: 20, duration: 0.7, ease: 'power2.out' });
-        gsap.from('.hero-subtext', { opacity: 0, y: 20, duration: 0.7, delay: 0.2, ease: 'power2.out' });
-        gsap.from('.hero-visual-container', { opacity: 0, scale: 0.95, duration: 0.8, delay: 0.3, ease: 'power2.out' });
-      }
-    });
-  </script>
+  <script src="js/hero-simulation.js"></script>
+  <script src="js/hero-3d.js"></script>
+  <script src="js/landing.js"></script>
 </body>
 </html>
