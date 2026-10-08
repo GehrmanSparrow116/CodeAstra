@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HealthPulse — Overview & Command Center</title>
+  <meta name="description" content="HealthPulse is a clinical healthcare intelligence and disease outbreak early warning command center.">
+  
+  <!-- Google Fonts: Outfit & Inter for high-clarity clinical typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Leaflet Map Stylesheet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+  <!-- HealthPulse Core Stylesheets -->
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+
+  <div class="app-container">
+    
+    <!-- ====================================================================
+         LEFT SIDEBAR NAVIGATION (Fixed Width 240px)
+         ==================================================================== -->
+    <aside class="sidebar" id="sidebar">
+      <div>
+        <div class="sidebar-header">
+          <a href="admin-overview.html" class="brand-logo-container">
+            <div class="brand-icon-wrapper">
+              <i data-lucide="radio"></i>
+            </div>
+            <div class="brand-text-wrapper">
+              <div class="brand-name">HealthPulse</div>
+              <div class="brand-subtitle">Health Intelligence Platform</div>
+            </div>
+          </a>
+          <button class="sidebar-collapse-btn" id="sidebar-collapse-btn" title="Toggle Navigation Rail">
+            <i data-lucide="chevron-left"></i>
+          </button>
+        </div>
+
+        <nav class="sidebar-nav-content">
+          <div class="nav-section-title">Dashboard</div>
+          <a href="admin-overview.html" class="nav-item active">
+            <i data-lucide="home"></i>
+            <span>Overview</span>
+          </a>
+
+          <div class="nav-section-title">Monitoring</div>
+          <a href="pages/disease-trends.html" class="nav-item">
+            <i data-lucide="trending-up"></i>
+            <span>Disease Trends</span>
+          </a>
+          <a href="pages/outbreaks.html" class="nav-item">
+            <i data-lucide="activity"></i>
+            <span>Outbreaks</span>
+          </a>
+          <a href="pages/hotspots.html" class="nav-item">
+            <i data-lucide="map-pin"></i>
+            <span>Geographic Hotspots</span>
+          </a>
+
+          <div class="nav-section-title">Intelligence</div>
+          <a href="pages/predictions.html" class="nav-item">
+            <i data-lucide="brain-circuit"></i>
+            <span>Outbreak Predictions</span>
+          </a>
+          <a href="pages/early-warning.html" class="nav-item">
+            <i data-lucide="shield-alert"></i>
+            <span>Early Warning (EWS)</span>
+          </a>
+          <a href="pages/ai-insights.html" class="nav-item">
+            <i data-lucide="sparkles"></i>
+            <span>Explainable AI</span>
+          </a>
+
+          <div class="nav-section-title">Data & Reports</div>
+          <a href="pages/data-explorer.html" class="nav-item">
+            <i data-lucide="database"></i>
+            <span>Data Explorer</span>
+          </a>
+          <a href="pages/historical.html" class="nav-item">
+            <i data-lucide="history"></i>
+            <span>Historical Analysis</span>
+          </a>
+
+          <div class="nav-section-title">System</div>
+          <a href="pages/settings.html" class="nav-item">
+            <i data-lucide="settings"></i>
+            <span>Settings</span>
+          </a>
+          <a href="pages/profile.html" class="nav-item">
+            <i data-lucide="user"></i>
+            <span>Profile & Account</span>
+          </a>
+          <a href="javascript:void(0);" onclick="if(window.HealthPulseAuth || window.CodeAstraAuth) (window.HealthPulseAuth || window.CodeAstraAuth).logout(); else window.location.href='index.html';" class="nav-item" style="color:#ef4444;">
+            <i data-lucide="log-out"></i>
+            <span>Logout</span>
+          </a>
+        </nav>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="user-profile-card">
+          <div class="avatar-badge-wrapper">
+            <div class="user-avatar">DS</div>
+            <div class="status-indicator-dot"></div>
+          </div>
+          <div class="user-info-text">
+            <div class="user-name">Dr. Sharma</div>
+            <div class="user-role">Healthcare Professional</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ====================================================================
+         MAIN WRAPPER (Fills 100% of remaining horizontal space after 240px sidebar)
+         ==================================================================== -->
+    <div class="main-wrapper">
+      
+      <!-- TOP HEADER BAR -->
+      <header class="top-header">
+        <div class="header-left-tools">
+          <div class="global-search-container">
+            <i data-lucide="search"></i>
+            <input type="text" id="global-search-input" class="global-search-input" placeholder="Search disease, region, or alert...">
+            <span class="kbd-shortcut">⌘K</span>
+          </div>
+        </div>
+
+        <div class="header-right-tools">
+          <select id="disease-filter-select" class="custom-select" aria-label="Select Disease">
+            <option value="All Diseases">All Diseases</option>
+            <option value="Influenza">Influenza</option>
+            <option value="Dengue">Dengue</option>
+            <option value="COVID-19">COVID-19</option>
+            <option value="Cholera">Cholera</option>
+            <option value="Typhoid">Typhoid</option>
+          </select>
+
+          <select id="region-filter-select" class="custom-select" aria-label="Select Region">
+            <option value="All Regions">All Regions</option>
+            <option value="Gotham">Gotham</option>
+            <option value="Metropolis">Metropolis</option>
+            <option value="Coast City">Coast City</option>
+            <option value="Star City">Star City</option>
+            <option value="Central City">Central City</option>
+          </select>
+
+          <div class="live-indicator-pill" id="live-indicator-pill">
+            <span class="pulse-dot"></span>
+            <span><strong id="live-status-text">LIVE SURVEILLANCE</strong>: <span id="live-time-ticker">--:--:--</span> (<span id="last-signal-timer">0s ago</span>)</span>
+          </div>
+
+          <button class="header-icon-btn" id="sim-toggle-btn" title="Pause / Resume Real-Time Simulation">
+            <i data-lucide="pause"></i>
+          </button>
+
+          <a href="public/index.html" style="display:inline-flex; align-items:center; gap:0.4rem; padding: 6px 14px; font-size: 0.82rem; background: var(--primary-light); color: var(--primary-blue); border: 1px solid #bfdbfe; border-radius:var(--radius-full); text-decoration:none; font-weight:700;">
+            <span>Public Portal</span>
+            <i data-lucide="external-link" style="width:14px;"></i>
+          </a>
+        </div>
+      </header>
+
+      <!-- DASHBOARD CONTENT CONTAINER -->
+      <div class="dashboard-content">
+
+        <!-- 1. HERO WELCOME BANNER -->
+        <section class="hero-welcome-section">
+          <div class="hero-welcome-text">
+            <h1>Command Center Overview</h1>
+            <p>Real-time epidemiological surveillance, anomaly detection, and early warning scores.</p>
+          </div>
+          <div class="hero-watermark">
+            <span class="watermark-brand">HealthPulse</span>
+            <span class="watermark-motto">Health Intelligence Platform</span>
+          </div>
+        </section>
+
+        <!-- 2. KPI METRIC CARDS GRID (4 COLUMNS FULL WIDTH) -->
+        <section class="kpi-cards-grid">
+          
+          <div class="kpi-card">
+            <div class="kpi-top-row">
+              <div>
+                <div class="kpi-title">TOTAL CONFIRMED CASES</div>
+                <div class="kpi-number-row">
+                  <div class="kpi-value" id="kpi-total-cases">12,482</div>
+                </div>
+              </div>
+              <div class="kpi-icon-pill blue"><i data-lucide="users"></i></div>
+            </div>
+            <div class="kpi-trend-row">
+              <span class="trend-badge up-red"><i data-lucide="trending-up"></i> +12.4%</span>
+              <span>vs. previous period</span>
+            </div>
+            <div class="kpi-sparkline-container" id="kpi-sparkline-cases"></div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-top-row">
+              <div>
+                <div class="kpi-title">ACTIVE OUTBREAK ZONES</div>
+                <div class="kpi-number-row">
+                  <div class="kpi-value" id="kpi-active-outbreaks">08</div>
+                </div>
+              </div>
+              <div class="kpi-icon-pill red"><i data-lucide="activity"></i></div>
+            </div>
+            <div class="kpi-trend-row">
+              <span class="trend-badge up-red"><i data-lucide="alert-triangle"></i> +2 new</span>
+              <span>clusters detected</span>
+            </div>
+            <div class="kpi-sparkline-container" id="kpi-sparkline-outbreaks"></div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-top-row">
+              <div>
+                <div class="kpi-title">HIGH-RISK REGIONS</div>
+                <div class="kpi-number-row">
+                  <div class="kpi-value" id="kpi-high-risk-regions">04</div>
+                </div>
+              </div>
+              <div class="kpi-icon-pill orange"><i data-lucide="map-pin"></i></div>
+            </div>
+            <div class="kpi-trend-row">
+              <span class="trend-badge up-orange"><i data-lucide="trending-up"></i> +18.0%</span>
+              <span>vs. previous period</span>
+            </div>
+            <div class="kpi-sparkline-container" id="kpi-sparkline-regions"></div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-top-row">
+              <div>
+                <div class="kpi-title">EARLY WARNING SCORE</div>
+                <div class="kpi-number-row">
+                  <div class="kpi-value" id="kpi-ews-score">78/100</div>
+                </div>
+              </div>
+              <div class="kpi-icon-pill teal"><i data-lucide="shield-alert"></i></div>
+            </div>
+            <div class="kpi-trend-row">
+              <span class="kpi-badge high-pill">HIGH RISK</span>
+              <span>CLASSIFICATION</span>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- 3. CHARTS MAIN GRID (1.7fr 1fr) -->
+        <section class="charts-main-grid">
+          
+          <div class="chart-card">
+            <div class="card-header-bar">
+              <div class="card-title-group">
+                <i data-lucide="trending-up" style="color:var(--primary-blue); width:20px; height:20px;"></i>
+                <h3 class="card-title">Case Trend Over Time</h3>
+              </div>
+              <div class="card-controls-group">
+                <div class="timeframe-pill-group">
+                  <button class="time-btn" data-timeframe="1M">1M</button>
+                  <button class="time-btn" data-timeframe="3M">3M</button>
+                  <button class="time-btn" data-timeframe="6M">6M</button>
+                  <button class="time-btn active" data-timeframe="1Y">1Y</button>
+                </div>
+              </div>
+            </div>
+            <div class="echart-container" id="case-trend-chart"></div>
+          </div>
+
+          <div class="chart-card">
+            <div class="card-header-bar">
+              <div class="card-title-group">
+                <i data-lucide="pie-chart" style="color:var(--primary-blue); width:20px; height:20px;"></i>
+                <h3 class="card-title">Disease Distribution</h3>
+              </div>
+            </div>
+            <div class="disease-distribution-layout">
+              <div class="donut-chart-wrapper">
+                <div id="disease-donut-chart"></div>
+              </div>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- 4. MIDDLE SURVEILLANCE GRID (1.35fr 0.95fr 1fr) -->
+        <section class="surveillance-middle-grid">
+          
+          <!-- Map Card -->
+          <div class="chart-card map-card-container">
+            <div class="card-header-bar">
+              <div class="card-title-group">
+                <i data-lucide="map" style="color:var(--primary-blue); width:20px; height:20px;"></i>
+                <h3 class="card-title">Geographic Risk Map</h3>
+              </div>
+            </div>
+            <div class="map-filters-row">
+              <select id="map-disease-filter" class="map-filter-select"><option value="All Diseases">All Diseases</option><option value="Dengue">Dengue</option><option value="Influenza">Influenza</option><option value="COVID-19">COVID-19</option><option value="Cholera">Cholera</option></select>
+              <select id="map-risk-filter" class="map-filter-select"><option value="All Risk Levels">All Risk Levels</option><option value="CRITICAL">Critical</option><option value="HIGH">High</option><option value="MODERATE">Moderate</option><option value="LOW">Low</option></select>
+              <select id="map-metric-filter" class="map-filter-select"><option value="Cases">Cases Burden</option><option value="EWS Score">EWS Score</option></select>
+            </div>
+            <div class="leaflet-map-wrapper" style="position:relative;">
+              <div id="leaflet-risk-map" style="width:100%; height:310px;"></div>
+              <div class="map-live-overlay-badge"><span>Map Feed: <strong id="map-live-status-timer">0s ago</strong></span></div>
+            </div>
+          </div>
+
+          <!-- EWS Gauge Card -->
+          <div class="chart-card">
+            <div class="card-header-bar">
+              <div class="card-title-group">
+                <i data-lucide="shield-alert" style="color:var(--primary-blue); width:20px; height:20px;"></i>
+                <h3 class="card-title">Early Warning Score</h3>
+              </div>
+            </div>
+            <div class="echart-container" id="ews-gauge-chart" style="height:220px; min-height:220px;"></div>
+            <div style="margin-top:10px; text-align:center;">
+              <button class="btn-explainability" id="open-explainability-btn" style="padding:8px 14px; background:var(--primary-light); color:var(--primary-blue); border:1px solid #bfdbfe; border-radius:var(--radius-md); font-weight:700; cursor:pointer;">
+                <i data-lucide="sparkles" style="width:16px; vertical-align:middle;"></i> View Explainable AI Breakdown
+              </button>
+            </div>
+          </div>
+
+          <!-- Outbreak Alerts Card -->
+          <div class="chart-card">
+            <div class="card-header-bar">
+              <div class="card-title-group">
+                <i data-lucide="bell" style="color:var(--primary-blue); width:20px; height:20px;"></i>
+                <h3 class="card-title">Outbreak Alerts</h3>
+              </div>
+            </div>
+            <div class="alerts-list-container" id="alerts-list-container" style="display:flex; flex-direction:column; gap:10px; max-height:280px; overflow-y:auto;">
+            </div>
+          </div>
+
+        </section>
+
+        <!-- 5. LOWER GRID SECTION -->
+        <section class="surveillance-middle-grid" style="grid-template-columns: 1.2fr 0.9fr 0.9fr;">
+          
+          <!-- Regional Risk Table -->
+          <div class="chart-card">
+            <div class="card-header-bar">
+              <div class="card-title-group">
+                <i data-lucide="list" style="color:var(--primary-blue); width:20px; height:20px;"></i>
+                <h3 class="card-title">Regional Risk Surveillance</h3>
+              </div>
+            </div>
+            <div class="risk-table-container" id="risk-table-container">
+            </div>
+          </div>
+
+          <!-- Prediction Card -->
+          <div class="chart-card">
+            <div class="card-header-bar">
+              <div class="card-title-group">
+                <i data-lucide="brain-circuit" style="color:var(--primary-blue); width:20px; height:20px;"></i>
+                <h3 class="card-title">Outbreak Prediction</h3>
+              </div>
+            </div>
+            <div class="echart-container" id="prediction-mini-echart" style="height:220px; min-height:220px;"></div>
+          </div>
+
+          <!-- Activity Log Stream -->
+          <div class="chart-card">
+            <div class="card-header-bar">
+              <div class="card-title-group">
+                <i data-lucide="activity" style="color:var(--primary-blue); width:20px; height:20px;"></i>
+                <h3 class="card-title">Activity Stream</h3>
+              </div>
+            </div>
+            <div class="activity-log-stream" id="activity-feed-list" style="display:flex; flex-direction:column; gap:8px; max-height:240px; overflow-y:auto;">
+            </div>
+          </div>
+
+        </section>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- EXPLAINABILITY MODAL -->
+  <div class="modal-backdrop" id="explainability-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <i data-lucide="sparkles" class="modal-icon"></i>
+          <div>
+            <h3>Explainable AI (XAI) Risk Drivers</h3>
+            <p>Feature weights contributing to Early Warning Score (EWS: 78/100).</p>
+          </div>
+        </div>
+        <button class="modal-close-btn" id="close-modal-btn"><i data-lucide="x"></i></button>
+      </div>
+
+      <div class="modal-body">
+        <div class="xai-summary-text" style="font-size:0.9rem; color:var(--text-secondary); margin-bottom:16px;">
+          Risk is increasing primarily due to rapid case growth (+32.4%) and elevated hospitalization burden in Gotham. The current trend is significantly higher than the expected baseline (Z = 3.42).
+        </div>
+
+        <div class="xai-feature-row" style="margin-bottom:12px;">
+          <div style="display:flex; justify-content:space-between; font-size:0.85rem; font-weight:700; margin-bottom:4px;">
+            <span>Week-over-Week Case Growth Rate</span>
+            <span style="color:var(--risk-critical);">Weight: 38.4%</span>
+          </div>
+          <div style="height:6px; background:#e2e8f0; border-radius:9999px; overflow:hidden;">
+            <div style="width:85%; height:100%; background:var(--risk-critical);"></div>
+          </div>
+        </div>
+
+        <div class="xai-feature-row" style="margin-bottom:12px;">
+          <div style="display:flex; justify-content:space-between; font-size:0.85rem; font-weight:700; margin-bottom:4px;">
+            <span>4-Week Rolling Z-Score Anomaly Deviation</span>
+            <span style="color:var(--risk-critical);">Weight: 29.2%</span>
+          </div>
+          <div style="height:6px; background:#e2e8f0; border-radius:9999px; overflow:hidden;">
+            <div style="width:72%; height:100%; background:var(--risk-critical);"></div>
+          </div>
+        </div>
+
+        <div class="xai-feature-row" style="margin-bottom:12px;">
+          <div style="display:flex; justify-content:space-between; font-size:0.85rem; font-weight:700; margin-bottom:4px;">
+            <span>Hospitalization-to-Case Ratio</span>
+            <span style="color:var(--risk-high);">Weight: 18.1%</span>
+          </div>
+          <div style="height:6px; background:#e2e8f0; border-radius:9999px; overflow:hidden;">
+            <div style="width:54%; height:100%; background:var(--risk-high);"></div>
+          </div>
+        </div>
+
+        <div class="xai-feature-row">
+          <div style="display:flex; justify-content:space-between; font-size:0.85rem; font-weight:700; margin-bottom:4px;">
+            <span>Population Case Density (per 100k)</span>
+            <span style="color:var(--risk-moderate);">Weight: 14.3%</span>
+          </div>
+          <div style="height:6px; background:#e2e8f0; border-radius:9999px; overflow:hidden;">
+            <div style="width:40%; height:100%; background:var(--risk-moderate);"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- SCRIPTS -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+  <!-- Application Scripts -->
+  <script src="js/config.js"></script>
+  <script src="js/shared.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/map.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/realtime.js"></script>
+  <script src="js/auth.js"></script>
+
+</body>
+</html>

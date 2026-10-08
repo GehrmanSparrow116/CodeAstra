@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HealthPulse — Public Health Awareness & Disease Surveillance</title>
+  <meta name="description" content="Stay informed and protected. Understand disease activity, emerging outbreaks, and health risks in your region with HealthPulse Public Portal.">
+
+  <!-- Google Fonts: Outfit & Inter for clean healthcare typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+  <!-- HealthPulse Public Stylesheets -->
+  <link rel="stylesheet" href="../css/public.css">
+  <link rel="stylesheet" href="../css/public-components.css">
+  <link rel="stylesheet" href="../css/public-responsive.css">
+</head>
+<body>
+
+  <div class="public-page-wrapper">
+
+    <!-- ====================================================================
+         TOP PUBLIC NAVIGATION BAR
+         ==================================================================== -->
+    <header class="public-navbar">
+      <div class="public-navbar-container">
+        
+        <a href="index.html" class="brand-logo-public">
+          <div class="brand-logo-icon">
+            <i data-lucide="shield-check"></i>
+          </div>
+          <div class="brand-text-block">
+            <span class="brand-title">HealthPulse</span>
+            <span class="brand-subtitle">Public Portal</span>
+          </div>
+        </a>
+
+        <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle navigation menu">
+          <i data-lucide="menu"></i>
+        </button>
+
+        <nav class="nav-links-public" id="nav-links-public">
+          <a href="index.html" class="active">Home</a>
+          <a href="disease-outbreaks.html">Disease Outbreaks</a>
+          <a href="health-risk-map.html">Risk Map</a>
+          <a href="health-insights.html">Health Insights</a>
+          <a href="prevention.html">Prevention</a>
+          <a href="how-it-works.html">How It Works</a>
+        </nav>
+
+        <div class="navbar-right-actions">
+          <a href="../login.html" class="nav-auth-btn" id="public-nav-auth-btn">Sign In</a>
+        </div>
+
+      </div>
+    </header>
+
+    <!-- ====================================================================
+         MAIN PAGE CONTENT
+         ==================================================================== -->
+    <main class="public-main-content">
+
+      <!-- 1. HERO SECTION -->
+      <section class="hero-public">
+        <div>
+          <div class="hero-tag">
+            <i data-lucide="activity"></i> Monitored Health Intelligence Simulation
+          </div>
+          <h1 class="hero-title">Stay Informed. Stay Protected.</h1>
+          <p class="hero-subtitle">
+            Understand disease activity, emerging outbreaks and local health risks in your region through clear, actionable insights.
+          </p>
+          <div class="hero-ctas">
+            <button class="btn-primary-public" onclick="document.getElementById('home-region-select').focus();">
+              <i data-lucide="map-pin"></i> Check My Area
+            </button>
+            <a href="disease-outbreaks.html" class="btn-secondary-public">
+              <i data-lucide="virus"></i> Explore Outbreaks
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-card-visual">
+          <div class="hero-visual-header">
+            <span class="hero-visual-title">Live Health Status Summary</span>
+            <span class="risk-badge moderate">MODERATE AWARENESS</span>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:0.9rem;">
+            <div style="display:flex; justify-content:space-between; align-items:center; background:var(--bg-subtle); padding:0.75rem 1rem; border-radius:var(--radius-md);">
+              <span style="font-size:0.875rem; color:var(--text-muted); font-weight:500;">Highest Activity Disease:</span>
+              <strong style="color:var(--primary-navy); font-size:0.95rem;">Dengue Fever</strong>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center; background:var(--bg-subtle); padding:0.75rem 1rem; border-radius:var(--radius-md);">
+              <span style="font-size:0.875rem; color:var(--text-muted); font-weight:500;">Active Outbreak Zones:</span>
+              <strong style="color:var(--primary-navy); font-size:0.95rem;">4 Monitored Districts</strong>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center; background:var(--bg-subtle); padding:0.75rem 1rem; border-radius:var(--radius-md);">
+              <span style="font-size:0.875rem; color:var(--text-muted); font-weight:500;">Recommended Precaution:</span>
+              <strong style="color:var(--brand-blue); font-size:0.9rem;">Vector Mosquito Defense</strong>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. LOCATION CHECKER COMPONENT -->
+      <section class="location-checker-section">
+        <div class="checker-header">
+          <h2>Check Health Conditions in Your Area</h2>
+          <p>Select a monitored demonstration region to inspect local disease trends and precautions.</p>
+        </div>
+
+        <div class="checker-controls">
+          <select id="home-region-select" class="select-custom" aria-label="Select Monitored Region">
+            <!-- Populated dynamically via home.js -->
+          </select>
+          <span style="font-size:0.85rem; color:var(--text-muted);">Showing simulated health surveillance data for demonstration regions.</span>
+        </div>
+
+        <div class="checker-result-card" id="checker-result-card">
+          <div class="result-metric-item">
+            <span class="result-metric-label">Current Health Risk</span>
+            <div class="result-metric-value">
+              <span class="risk-badge high" id="checker-risk-badge">HIGH RISK</span>
+            </div>
+          </div>
+
+          <div class="result-metric-item">
+            <span class="result-metric-label">Most Active Disease</span>
+            <div class="result-metric-value" id="checker-disease-val">
+              <i data-lucide="activity" style="width:18px; color:var(--brand-blue);"></i> Dengue
+            </div>
+          </div>
+
+          <div class="result-metric-item">
+            <span class="result-metric-label">Recent Disease Trend</span>
+            <div class="result-metric-value" id="checker-trend-val">
+              <span class="trend-up">↑ Increasing (+18.4%)</span>
+            </div>
+          </div>
+
+          <div class="result-metric-item" style="grid-column: span 2;">
+            <span class="result-metric-label">Recommended Precaution</span>
+            <div style="font-size:0.925rem; font-weight:600; color:var(--primary-slate);" id="checker-precaution-val">
+              Consider following mosquito-bite prevention measures and removing standing water around living spaces.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. CURRENT HEALTH STATUS (4 PUBLIC CARDS) -->
+      <section style="margin-bottom:3.5rem;">
+        <div class="section-title-group">
+          <h2>Current Public Health Overview</h2>
+          <p>Summary of disease surveillance metrics across all monitored demonstration regions.</p>
+        </div>
+
+        <div class="public-card-grid-4">
+          <div class="public-metric-card">
+            <div class="metric-card-top">
+              <div class="metric-card-icon"><i data-lucide="flame"></i></div>
+              <span class="risk-badge high">HIGH</span>
+            </div>
+            <div>
+              <div class="metric-card-val">8</div>
+              <div class="metric-card-lbl">Active Outbreaks</div>
+            </div>
+          </div>
+
+          <div class="public-metric-card">
+            <div class="metric-card-top">
+              <div class="metric-card-icon" style="background:#fff7ed; color:#f97316;"><i data-lucide="map-pin"></i></div>
+              <span class="risk-badge moderate">4 CITIES</span>
+            </div>
+            <div>
+              <div class="metric-card-val">4</div>
+              <div class="metric-card-lbl">High-Risk Regions</div>
+            </div>
+          </div>
+
+          <div class="public-metric-card">
+            <div class="metric-card-top">
+              <div class="metric-card-icon" style="background:#ecfeff; color:#0891b2;"><i data-lucide="trending-up"></i></div>
+              <span class="risk-badge high">SURGING</span>
+            </div>
+            <div>
+              <div class="metric-card-val">2</div>
+              <div class="metric-card-lbl">Rising Diseases</div>
+            </div>
+          </div>
+
+          <div class="public-metric-card">
+            <div class="metric-card-top">
+              <div class="metric-card-icon" style="background:#ecfdf5; color:#10b981;"><i data-lucide="shield-check"></i></div>
+              <span class="risk-badge low">MONITORED</span>
+            </div>
+            <div>
+              <div class="metric-card-val">Stable</div>
+              <div class="metric-card-lbl">Overall Health Status</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. WHAT IS HAPPENING NOW? (DISEASE CARDS) -->
+      <section style="margin-bottom:3.5rem;">
+        <div class="section-title-group">
+          <h2>What is Happening Now?</h2>
+          <p>Current activity status and trends for monitored infectious diseases.</p>
+        </div>
+
+        <div class="disease-card-grid">
+
+          <!-- Dengue -->
+          <div class="disease-public-card">
+            <div>
+              <div class="disease-card-header">
+                <div class="disease-card-title">
+                  <div class="disease-icon-box">🦟</div>
+                  <div>
+                    <h3>Dengue</h3>
+                    <span style="font-size:0.8rem; color:var(--text-muted); font-weight:600;">High Activity</span>
+                  </div>
+                </div>
+                <span class="risk-badge high">HIGH RISK</span>
+              </div>
+              <div class="disease-card-body">
+                <div class="disease-trend-row trend-up">
+                  <i data-lucide="trending-up"></i>
+                  <span>↑ Increasing (+18.4%)</span>
+                </div>
+                <p class="disease-summary-txt">Activity is increasing across Metropolis and Coast City monitored regions due to seasonal vector breeding.</p>
+              </div>
+            </div>
+            <a href="disease-outbreaks.html" class="btn-secondary-public" style="justify-content:center;">View Details <i data-lucide="arrow-right"></i></a>
+          </div>
+
+          <!-- Influenza -->
+          <div class="disease-public-card">
+            <div>
+              <div class="disease-card-header">
+                <div class="disease-card-title">
+                  <div class="disease-icon-box">🤧</div>
+                  <div>
+                    <h3>Influenza</h3>
+                    <span style="font-size:0.8rem; color:var(--text-muted); font-weight:600;">Critical Activity</span>
+                  </div>
+                </div>
+                <span class="risk-badge critical">CRITICAL</span>
+              </div>
+              <div class="disease-card-body">
+                <div class="disease-trend-row trend-up">
+                  <i data-lucide="trending-up"></i>
+                  <span>↑ High Spike (+24.1%)</span>
+                </div>
+                <p class="disease-summary-txt">Seasonal influenza admissions elevating rapidly across Gotham City industrial sectors.</p>
+              </div>
+            </div>
+            <a href="disease-outbreaks.html" class="btn-secondary-public" style="justify-content:center;">View Details <i data-lucide="arrow-right"></i></a>
+          </div>
+
+          <!-- COVID-19 -->
+          <div class="disease-public-card">
+            <div>
+              <div class="disease-card-header">
+                <div class="disease-card-title">
+                  <div class="disease-icon-box">🦠</div>
+                  <div>
+                    <h3>COVID-19</h3>
+                    <span style="font-size:0.8rem; color:var(--text-muted); font-weight:600;">Low Activity</span>
+                  </div>
+                </div>
+                <span class="risk-badge low">LOW RISK</span>
+              </div>
+              <div class="disease-card-body">
+                <div class="disease-trend-row trend-down">
+                  <i data-lucide="trending-down"></i>
+                  <span>↓ Decreasing (-4.2%)</span>
+                </div>
+                <p class="disease-summary-txt">Activity remains low and steady across all monitored municipal districts with minor variant shifts.</p>
+              </div>
+            </div>
+            <a href="disease-outbreaks.html" class="btn-secondary-public" style="justify-content:center;">View Details <i data-lucide="arrow-right"></i></a>
+          </div>
+
+          <!-- Cholera -->
+          <div class="disease-public-card">
+            <div>
+              <div class="disease-card-header">
+                <div class="disease-card-title">
+                  <div class="disease-icon-box">💧</div>
+                  <div>
+                    <h3>Cholera</h3>
+                    <span style="font-size:0.8rem; color:var(--text-muted); font-weight:600;">Moderate Activity</span>
+                  </div>
+                </div>
+                <span class="risk-badge moderate">MODERATE</span>
+              </div>
+              <div class="disease-card-body">
+                <div class="disease-trend-row trend-up">
+                  <i data-lucide="trending-up"></i>
+                  <span>↑ Slight Increase (+4.8%)</span>
+                </div>
+                <p class="disease-summary-txt">Isolated cluster monitoring remains active in coastal water quality surveillance zones.</p>
+              </div>
+            </div>
+            <a href="disease-outbreaks.html" class="btn-secondary-public" style="justify-content:center;">View Details <i data-lucide="arrow-right"></i></a>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 5. IMPORTANT PUBLIC HEALTH ALERTS -->
+      <section style="margin-bottom:3.5rem;">
+        <div class="section-title-group">
+          <h2>Important Health Alerts</h2>
+          <p>Public awareness notifications based on current simulated surveillance streams.</p>
+        </div>
+
+        <div class="alert-card-grid">
+
+          <div class="alert-card-public critical">
+            <div class="alert-icon-wrap"><i data-lucide="alert-octagon" style="width:24px; height:24px;"></i></div>
+            <div class="alert-content-wrap">
+              <div class="alert-title-row">
+                <h4>High Influenza Transmission in Gotham City</h4>
+                <span class="alert-timestamp">12 mins ago</span>
+              </div>
+              <p class="alert-desc-text">Surveillance sensors report an accelerating spike in flu-like respiratory illness. Residents are advised to wear masks in crowded transit.</p>
+            </div>
+          </div>
+
+          <div class="alert-card-public warning">
+            <div class="alert-icon-wrap"><i data-lucide="alert-triangle" style="width:24px; height:24px;"></i></div>
+            <div class="alert-content-wrap">
+              <div class="alert-title-row">
+                <h4>Rising Dengue Activity Detected in Metropolis</h4>
+                <span class="alert-timestamp">1 hour ago</span>
+              </div>
+              <p class="alert-desc-text">Several suburban districts in Metropolis show increased mosquito vector activity. Please inspect and empty outdoor water vessels.</p>
+            </div>
+          </div>
+
+          <div class="alert-card-public info">
+            <div class="alert-icon-wrap"><i data-lucide="info" style="width:24px; height:24px;"></i></div>
+            <div class="alert-content-wrap">
+              <div class="alert-title-row">
+                <h4>Coastal Water Advisory in Coast City</h4>
+                <span class="alert-timestamp">4 hours ago</span>
+              </div>
+              <p class="alert-desc-text">Routine water quality testing is underway following recent heavy precipitation. Use boiled or bottled water in recreational zones.</p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 6. QUICK ACTIONS -->
+      <section style="margin-bottom:3.5rem;">
+        <div class="section-title-group">
+          <h2>Explore HealthPulse Public Portal</h2>
+          <p>Navigate directly to key health resources and interactive surveillance tools.</p>
+        </div>
+
+        <div class="quick-action-grid">
+
+          <a href="disease-outbreaks.html" class="quick-action-card">
+            <div class="quick-action-icon">🦠</div>
+            <h3>Disease Outbreaks</h3>
+            <p>Explore current active diseases, symptoms, and regional case burdens.</p>
+          </a>
+
+          <a href="health-risk-map.html" class="quick-action-card">
+            <div class="quick-action-icon">📍</div>
+            <h3>Check My Area</h3>
+            <p>Inspect the interactive geographic risk map for monitored demonstration cities.</p>
+          </a>
+
+          <a href="prevention.html" class="quick-action-card">
+            <div class="quick-action-icon">🛡️</div>
+            <h3>Prevention Guidelines</h3>
+            <p>Practical steps, vector defense, and Do/Don't checklists to protect your family.</p>
+          </a>
+
+          <a href="health-insights.html" class="quick-action-card">
+            <div class="quick-action-icon">📊</div>
+            <h3>Health Insights</h3>
+            <p>Simple charts and plain-language interpretations of disease activity trends.</p>
+          </a>
+
+        </div>
+      </section>
+
+      <!-- 7. DISEASE ACTIVITY CHART -->
+      <section class="public-chart-card">
+        <div class="chart-card-header">
+          <div>
+            <h3>Recent Disease Activity</h3>
+            <p style="font-size:0.875rem; color:var(--text-muted); margin-top:2px;">Comparing 7-week reported case trajectories for Dengue, Influenza, and COVID-19.</p>
+          </div>
+        </div>
+
+        <div class="echart-container-public" id="home-activity-chart"></div>
+
+        <div class="plain-language-box">
+          <i data-lucide="help-circle" class="plain-language-icon"></i>
+          <div class="plain-language-content">
+            <h4>What does this chart show?</h4>
+            <p>This graph displays reported case movements over recent weeks. Dengue cases (orange) are steadily climbing, while Influenza (blue) is maintaining a high seasonal peak. COVID-19 (green) continues a gentle downward trend.</p>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ====================================================================
+         PUBLIC FOOTER
+         ==================================================================== -->
+    <footer class="public-footer">
+      <div class="public-footer-container">
+        
+        <div class="footer-disclaimer-box">
+          <strong>Medical & Simulation Disclaimer:</strong> Information provided by HealthPulse Public Portal is for health awareness and educational purposes and does not replace professional medical advice, diagnosis, or treatment. Risk levels shown are generated from simulated demonstration data.
+        </div>
+
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <h3><i data-lucide="shield-check"></i> HealthPulse</h3>
+            <p>Early Detection, Safer Communities. Transforming complex health surveillance data into clear public awareness.</p>
+          </div>
+
+          <div class="footer-col">
+            <h4>Public Pages</h4>
+            <ul class="footer-links">
+              <li><a href="index.html">Home</a></li>
+              <li><a href="disease-outbreaks.html">Disease Outbreaks</a></li>
+              <li><a href="health-risk-map.html">Health Risk Map</a></li>
+              <li><a href="prevention.html">Prevention & Precautions</a></li>
+              <li><a href="health-insights.html">Health Insights</a></li>
+              <li><a href="how-it-works.html">How It Works</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h4>Monitored Demo Regions</h4>
+            <ul class="footer-links">
+              <li><a href="health-risk-map.html">Metropolis</a></li>
+              <li><a href="health-risk-map.html">Gotham City</a></li>
+              <li><a href="health-risk-map.html">Star City</a></li>
+              <li><a href="health-risk-map.html">Central City</a></li>
+              <li><a href="health-risk-map.html">Coast City</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h4>Access</h4>
+            <ul class="footer-links">
+              <li><a href="../login.html?role=professional">Professional Portal ↗</a></li>
+              <li><a href="../login.html">Sign In</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <div>&copy; 2026 HealthPulse Health Intelligence Platform. All rights reserved.</div>
+          <div style="color:var(--text-light);">Designed for Public Awareness & Citizen Empowerment.</div>
+        </div>
+
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- SCRIPTS -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/realtime.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/public/public-common.js"></script>
+  <script src="../js/public/home.js"></script>
+
+</body>
+</html>

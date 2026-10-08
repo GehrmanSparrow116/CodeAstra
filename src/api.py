@@ -103,5 +103,18 @@ async def get_dashboard_data():
         "current_period": f"Year {recent_year}, Week {recent_week}"
     })
 
+@app.get("/api/config")
+async def get_config():
+    api_key = os.environ.get("GOOGLE_MAP_API_KEY", "")
+    env_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), '.env')
+    if not api_key and os.path.exists(env_path):
+        with open(env_path, 'r') as f:
+            for line in f:
+                if line.startswith('GOOGLE_MAP_API_KEY='):
+                    api_key = line.strip().split('=', 1)[1]
+                    break
+    return {"GOOGLE_MAP_API_KEY": api_key}
+
+
 if __name__ == "__main__":
     uvicorn.run("api:app", host="0.0.0.0", port=8000, reload=True)

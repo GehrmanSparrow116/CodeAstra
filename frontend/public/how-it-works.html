@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How HealthPulse Works — HealthPulse Public Portal</title>
+  <meta name="description" content="Learn how HealthPulse converts complex health data into clear, early public awareness and regional risk insights.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../css/public.css">
+  <link rel="stylesheet" href="../css/public-components.css">
+  <link rel="stylesheet" href="../css/public-responsive.css">
+</head>
+<body>
+
+  <div class="public-page-wrapper">
+
+    <!-- NAVIGATION BAR -->
+    <header class="public-navbar">
+      <div class="public-navbar-container">
+        
+        <a href="index.html" class="brand-logo-public">
+          <div class="brand-logo-icon"><i data-lucide="shield-check"></i></div>
+          <div class="brand-text-block">
+            <span class="brand-title">HealthPulse</span>
+            <span class="brand-subtitle">Public Portal</span>
+          </div>
+        </a>
+
+        <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle navigation menu">
+          <i data-lucide="menu"></i>
+        </button>
+
+        <nav class="nav-links-public" id="nav-links-public">
+          <a href="index.html">Home</a>
+          <a href="disease-outbreaks.html">Disease Outbreaks</a>
+          <a href="health-risk-map.html">Risk Map</a>
+          <a href="health-insights.html">Health Insights</a>
+          <a href="prevention.html">Prevention</a>
+          <a href="how-it-works.html" class="active">How It Works</a>
+        </nav>
+
+        <div class="navbar-right-actions">
+          <a href="../login.html" class="nav-auth-btn" id="public-nav-auth-btn">Sign In</a>
+        </div>
+
+      </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="public-main-content">
+
+      <!-- HERO SECTION -->
+      <section style="background:linear-gradient(135deg, #ffffff 0%, #f0f7ff 100%); border:1px solid var(--border-light); border-radius:var(--radius-xl); padding:3.5rem 3rem; margin-bottom:3.5rem; text-align:center;">
+        <div style="display:inline-flex; align-items:center; gap:0.5rem; padding:0.35rem 0.9rem; background:rgba(37,99,235,0.08); color:var(--brand-blue); font-size:0.85rem; font-weight:600; border-radius:var(--radius-full); margin-bottom:1rem;">
+          <i data-lucide="cpu" style="width:16px; height:16px;"></i> System Architecture
+        </div>
+        <h1 style="font-size:2.75rem; color:var(--primary-navy); margin-bottom:0.75rem;">How HealthPulse Works</h1>
+        <p style="font-size:1.15rem; color:var(--text-muted); max-width:640px; margin:0 auto 2rem;">
+          From health data collection to early community awareness — converting complex epidemiological signals into plain-language public guidance.
+        </p>
+      </section>
+
+      <!-- PIPELINE FLOW -->
+      <section style="margin-bottom:3.5rem;">
+        <div class="section-title-group">
+          <h2>Platform Processing Pipeline</h2>
+          <p>The sequential intelligence pipeline powering HealthPulse surveillance.</p>
+        </div>
+
+        <div class="pipeline-flow-container">
+          
+          <div class="pipeline-step-row">
+            <div class="pipeline-step-num">01</div>
+            <div class="pipeline-step-body">
+              <h3>DATA INGESTION</h3>
+              <p>Continuous monitoring of incoming health signals, clinic visit tallies, and environmental factors across monitored sectors.</p>
+            </div>
+          </div>
+
+          <div class="pipeline-step-row">
+            <div class="pipeline-step-num">02</div>
+            <div class="pipeline-step-body">
+              <h3>PREPROCESSING</h3>
+              <p>Normalizing, cleaning, and deduplicating raw signals into standardized population density metrics per 100,000 residents.</p>
+            </div>
+          </div>
+
+          <div class="pipeline-step-row">
+            <div class="pipeline-step-num">03</div>
+            <div class="pipeline-step-body">
+              <h3>BASELINE MONITORING</h3>
+              <p>Calculating 4-week rolling historical averages to establish expected baseline health levels for each seasonal period.</p>
+            </div>
+          </div>
+
+          <div class="pipeline-step-row">
+            <div class="pipeline-step-num">04</div>
+            <div class="pipeline-step-body">
+              <h3>ANOMALY DETECTION</h3>
+              <p>Scanning for unusual statistical deviations (Z-score threshold shifts) that signal emerging disease clusters before major spikes occur.</p>
+            </div>
+          </div>
+
+          <div class="pipeline-step-row">
+            <div class="pipeline-step-num">05</div>
+            <div class="pipeline-step-body">
+              <h3>RISK ASSESSMENT</h3>
+              <p>Synthesizing multi-factor regional risk metrics (case growth, hospitalization ratios, population density) into simple risk categories.</p>
+            </div>
+          </div>
+
+          <div class="pipeline-step-row">
+            <div class="pipeline-step-num">06</div>
+            <div class="pipeline-step-body">
+              <h3>EARLY WARNING</h3>
+              <p>Triggering public alerts and regional notifications when disease activity surpasses safety threshold baselines.</p>
+            </div>
+          </div>
+
+          <div class="pipeline-step-row" style="border-left:5px solid var(--brand-blue); background:#f4f8ff;">
+            <div class="pipeline-step-num" style="background:var(--brand-blue); color:#ffffff;">07</div>
+            <div class="pipeline-step-body">
+              <h3>PUBLIC INSIGHTS</h3>
+              <p>Translating complex technical surveillance metrics into plain-language awareness, maps, and practical prevention steps for citizens.</p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- TWO-SIDED PLATFORM COMPARISON -->
+      <section style="margin-bottom:3.5rem;">
+        <div class="section-title-group">
+          <h2>A Two-Sided Health Intelligence Platform</h2>
+          <p>HealthPulse serves both clinical healthcare authorities and the general public with tailored, purpose-built interfaces.</p>
+        </div>
+
+        <div class="pro-vs-public-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:2rem;">
+          
+          <div class="pro-vs-public-card" style="background:#ffffff; border:1px solid var(--border-light); border-radius:var(--radius-xl); padding:2rem; box-shadow:var(--shadow-sm);">
+            <div style="display:flex; align-items:center; gap:0.6rem; font-size:1.25rem; font-weight:700; color:var(--primary-navy); margin-bottom:1rem;">
+              <i data-lucide="stethoscope" style="color:var(--brand-blue);"></i> For Health Professionals
+            </div>
+            <ul style="list-style:none; display:flex; flex-direction:column; gap:0.85rem; font-size:0.925rem; color:var(--text-body);">
+              <li style="display:flex; align-items:flex-start; gap:0.5rem;"><i data-lucide="check" style="color:var(--brand-blue); width:18px; margin-top:2px;"></i> Advanced Early Warning Score (EWS) analytics</li>
+              <li style="display:flex; align-items:flex-start; gap:0.5rem;"><i data-lucide="check" style="color:var(--brand-blue); width:18px; margin-top:2px;"></i> Explainable AI (XAI) feature importance breakdowns</li>
+              <li style="display:flex; align-items:flex-start; gap:0.5rem;"><i data-lucide="check" style="color:var(--brand-blue); width:18px; margin-top:2px;"></i> Machine learning prediction models & raw Z-score logs</li>
+              <li style="display:flex; align-items:flex-start; gap:0.5rem;"><i data-lucide="check" style="color:var(--brand-blue); width:18px; margin-top:2px;"></i> Operational resource planning for hospital administrators</li>
+            </ul>
+            <a href="../login.html?role=professional" class="nav-auth-btn" style="margin-top:1.5rem; display:inline-flex; width:auto;">Launch Professional Portal ↗</a>
+          </div>
+
+          <div class="pro-vs-public-card" style="background:var(--brand-blue-light); border:1px solid #bfdbfe; border-radius:var(--radius-xl); padding:2rem;">
+            <div style="display:flex; align-items:center; gap:0.6rem; font-size:1.25rem; font-weight:700; color:var(--brand-blue); margin-bottom:1rem;">
+              <i data-lucide="users" style="color:var(--brand-blue);"></i> For the Public & Citizens
+            </div>
+            <ul style="list-style:none; display:flex; flex-direction:column; gap:0.85rem; font-size:0.925rem; color:var(--primary-slate);">
+              <li style="display:flex; align-items:flex-start; gap:0.5rem;"><i data-lucide="check" style="color:var(--brand-blue); width:18px; margin-top:2px;"></i> Clear, intuitive outbreak awareness and trend tracking</li>
+              <li style="display:flex; align-items:flex-start; gap:0.5rem;"><i data-lucide="check" style="color:var(--brand-blue); width:18px; margin-top:2px;"></i> Color-coded regional health risk maps and city checkers</li>
+              <li style="display:flex; align-items:flex-start; gap:0.5rem;"><i data-lucide="check" style="color:var(--brand-blue); width:18px; margin-top:2px;"></i> Actionable prevention steps, vector defense & Do/Don't checklists</li>
+              <li style="display:flex; align-items:flex-start; gap:0.5rem;"><i data-lucide="check" style="color:var(--brand-blue); width:18px; margin-top:2px;"></i> Plain-language health insights free from technical jargon</li>
+            </ul>
+            <a href="index.html" class="btn-primary-public" style="margin-top:1.5rem; display:inline-flex;">Explore Public Home</a>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- TRUST & TRANSPARENCY -->
+      <section style="background:#ffffff; border:1px solid var(--border-light); border-radius:var(--radius-xl); padding:2rem; margin-bottom:3rem;">
+        <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:1rem;">
+          <i data-lucide="shield-check" style="color:var(--brand-blue); width:28px; height:28px;"></i>
+          <h3 style="font-size:1.35rem; color:var(--primary-navy);">Trust & Transparency</h3>
+        </div>
+        <p style="font-size:0.95rem; color:var(--text-body); line-height:1.6; max-width:800px; margin-bottom:1.5rem;">
+          HealthPulse is designed to convert complex epidemiological data into clear, understandable public health information. The current demonstration environment operates on simulated health surveillance signals designed for public health awareness and educational presentation.
+        </p>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
+          <div style="background:var(--bg-subtle); padding:1rem; border-radius:var(--radius-md);">
+            <strong style="color:var(--primary-navy); font-size:0.9rem;">Privacy Preserving</strong>
+            <p style="font-size:0.85rem; color:var(--text-muted); margin-top:2px;">Operates exclusively on aggregated regional data streams.</p>
+          </div>
+          <div style="background:var(--bg-subtle); padding:1rem; border-radius:var(--radius-md);">
+            <strong style="color:var(--primary-navy); font-size:0.9rem;">Educational Purpose</strong>
+            <p style="font-size:0.85rem; color:var(--text-muted); margin-top:2px;">Designed for civic awareness and demonstration workflows.</p>
+          </div>
+          <div style="background:var(--bg-subtle); padding:1rem; border-radius:var(--radius-md);">
+            <strong style="color:var(--primary-navy); font-size:0.9rem;">Actionable Guidance</strong>
+            <p style="font-size:0.85rem; color:var(--text-muted); margin-top:2px;">Empowers citizens with evidence-based prevention steps.</p>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="public-footer">
+      <div class="public-footer-container">
+        <div class="footer-disclaimer-box">
+          <strong>Medical & Simulation Disclaimer:</strong> Information provided by HealthPulse Public Portal is for health awareness and educational purposes and does not replace professional medical advice.
+        </div>
+        <div class="footer-bottom">
+          <div>&copy; 2026 HealthPulse Health Intelligence Platform.</div>
+          <div style="color:var(--text-light);">Designed for Public Awareness & Citizen Empowerment.</div>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/realtime.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/public/public-common.js"></script>
+  <script src="../js/public/how-it-works.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HealthPulse — User Profile</title>
+  <meta name="description" content="User profile and clinical credential management placeholder.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/pages.css">
+</head>
+<body>
+
+  <div class="app-container">
+    
+    <!-- LEFT SIDEBAR NAVIGATION -->
+    <aside class="sidebar" id="sidebar">
+      <div>
+        <div class="sidebar-header">
+          <a href="../admin-overview.html" class="brand-logo-container">
+            <div class="brand-icon-wrapper">
+              <i data-lucide="radio"></i>
+            </div>
+            <div class="brand-text-wrapper">
+              <div class="brand-name">HealthPulse</div>
+              <div class="brand-subtitle">Health Intelligence Platform</div>
+            </div>
+          </a>
+          <button class="sidebar-collapse-btn" id="sidebar-collapse-btn" title="Toggle Navigation Rail">
+            <i data-lucide="chevron-left"></i>
+          </button>
+        </div>
+
+        <nav class="sidebar-nav-content">
+          <div class="nav-section-title">Dashboard</div>
+          <a href="../admin-overview.html" class="nav-item">
+            <i data-lucide="home"></i>
+            <span>Overview</span>
+          </a>
+
+          <div class="nav-section-title">Monitoring</div>
+          <a href="disease-trends.html" class="nav-item">
+            <i data-lucide="trending-up"></i>
+            <span>Disease Trends</span>
+          </a>
+          <a href="outbreaks.html" class="nav-item">
+            <i data-lucide="activity"></i>
+            <span>Outbreaks</span>
+          </a>
+          <a href="hotspots.html" class="nav-item">
+            <i data-lucide="map-pin"></i>
+            <span>Hotspots</span>
+          </a>
+
+          <div class="nav-section-title">Intelligence</div>
+          <a href="predictions.html" class="nav-item">
+            <i data-lucide="bar-chart-2"></i>
+            <span>Predictions</span>
+          </a>
+          <a href="early-warning.html" class="nav-item">
+            <i data-lucide="bell"></i>
+            <span>Early Warning</span>
+          </a>
+          <a href="ai-insights.html" class="nav-item">
+            <i data-lucide="sparkles"></i>
+            <span>AI Insights</span>
+          </a>
+
+          <div class="nav-section-title">Data</div>
+          <a href="data-explorer.html" class="nav-item">
+            <i data-lucide="database"></i>
+            <span>Data Explorer</span>
+          </a>
+          <a href="historical.html" class="nav-item">
+            <i data-lucide="history"></i>
+            <span>Historical</span>
+          </a>
+
+          <div class="nav-section-title">System</div>
+          <a href="settings.html" class="nav-item">
+            <i data-lucide="settings"></i>
+            <span>Settings</span>
+          </a>
+          <a href="profile.html" class="nav-item active">
+            <i data-lucide="user"></i>
+            <span>Profile</span>
+          </a>
+        </nav>
+      </div>
+
+      <div class="sidebar-footer">
+        <a href="profile.html" class="user-profile-card" style="text-decoration:none;">
+          <div class="avatar-badge-wrapper">
+            <div class="user-avatar">DS</div>
+            <span class="status-indicator-dot"></span>
+          </div>
+          <div class="user-info-text">
+            <div class="user-name">Dr. Sharma</div>
+            <div class="user-role">Healthcare Professional</div>
+          </div>
+        </a>
+        <div class="signout-action-btn">
+          <i data-lucide="log-out"></i>
+          <span>Sign Out</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN WRAPPER -->
+    <div class="main-wrapper">
+
+      <!-- TOP HEADER -->
+      <header class="top-header">
+        <div class="header-left-tools">
+          <div class="global-search-container">
+            <i data-lucide="search"></i>
+            <input type="text" id="global-search-input" class="global-search-input" placeholder="Search disease, region, or keyword..." />
+            <span class="kbd-shortcut">Ctrl K</span>
+          </div>
+        </div>
+
+        <div class="header-right-tools">
+          <div class="live-status-group">
+            <span id="live-time-ticker" class="live-clock-badge">10:42:18</span>
+            <div class="live-indicator-pill" id="live-indicator-pill">
+              <span class="pulse-dot"></span>
+              <span>Session Authenticated</span>
+            </div>
+          </div>
+
+          <button class="header-icon-btn" title="Surveillance Notifications">
+            <i data-lucide="bell"></i>
+            <span class="notification-badge"></span>
+          </button>
+
+          <a href="profile.html" class="header-user-avatar" style="text-decoration:none;">DS</a>
+        </div>
+      </header>
+
+      <!-- PAGE CONTENT -->
+      <main class="dashboard-content">
+
+        <!-- Page Header Banner -->
+        <div class="page-header-banner">
+          <div class="page-title-group">
+            <h1>Clinical Practitioner Profile</h1>
+            <p>Profile management will be available here.</p>
+          </div>
+        </div>
+
+        <!-- Profile Card -->
+        <div class="chart-card" style="max-width: 800px; margin: 0 auto 20px auto; padding: 28px;">
+          <div style="display: flex; align-items: center; gap: 20px; margin-bottom: 24px;">
+            <div style="width: 72px; height: 72px; border-radius: 50%; background: var(--primary-blue); color: #ffffff; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; font-weight: 800;">
+              DS
+            </div>
+            <div>
+              <h2 style="font-size: 1.4rem; font-weight: 800; color: var(--text-primary); margin-bottom: 2px;">Dr. Sharma</h2>
+              <div style="font-size: 0.85rem; color: var(--text-muted); font-weight: 600;">Chief Medical Surveillance Officer &bull; Public Health Directorate</div>
+              <div style="margin-top: 6px;">
+                <span class="risk-level-badge low" style="padding: 2px 8px; font-size: 0.72rem;">ACTIVE SESSION</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; font-size: 0.84rem;">
+            <div style="padding: 14px; background: #f8fafc; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+              <div style="font-size: 0.72rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">Organization</div>
+              <div style="font-weight: 700; color: var(--text-primary); margin-top: 4px;">Metropolitan Health & Epidemic Surveillance Agency</div>
+            </div>
+
+            <div style="padding: 14px; background: #f8fafc; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+              <div style="font-size: 0.72rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">Surveillance Clearance</div>
+              <div style="font-weight: 700; color: var(--primary-blue); margin-top: 4px;">Tier 1 Command Authority (Full Access)</div>
+            </div>
+
+            <div style="padding: 14px; background: #f8fafc; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+              <div style="font-size: 0.72rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">Assigned Regions</div>
+              <div style="font-weight: 700; color: var(--text-primary); margin-top: 4px;">Gotham, Metropolis, Coast City, Star City, Central City</div>
+            </div>
+
+            <div style="padding: 14px; background: #f8fafc; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+              <div style="font-size: 0.72rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">Email Contact</div>
+              <div style="font-weight: 700; color: var(--text-primary); margin-top: 4px;">dr.sharma@healthintel.healthpulse.org</div>
+            </div>
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="../js/config.js"></script>
+  <script src="../js/shared.js"></script>
+</body>
+</html>

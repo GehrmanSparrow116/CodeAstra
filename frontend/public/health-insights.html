@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Health Insights — HealthPulse Public Portal</title>
+  <meta name="description" content="Understand disease trends, regional comparisons, and plain-language health intelligence.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../css/public.css">
+  <link rel="stylesheet" href="../css/public-components.css">
+  <link rel="stylesheet" href="../css/public-responsive.css">
+</head>
+<body>
+
+  <div class="public-page-wrapper">
+
+    <!-- NAVIGATION BAR -->
+    <header class="public-navbar">
+      <div class="public-navbar-container">
+        
+        <a href="index.html" class="brand-logo-public">
+          <div class="brand-logo-icon"><i data-lucide="shield-check"></i></div>
+          <div class="brand-text-block">
+            <span class="brand-title">HealthPulse</span>
+            <span class="brand-subtitle">Public Portal</span>
+          </div>
+        </a>
+
+        <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle navigation menu">
+          <i data-lucide="menu"></i>
+        </button>
+
+        <nav class="nav-links-public" id="nav-links-public">
+          <a href="index.html">Home</a>
+          <a href="disease-outbreaks.html">Disease Outbreaks</a>
+          <a href="health-risk-map.html">Risk Map</a>
+          <a href="health-insights.html" class="active">Health Insights</a>
+          <a href="prevention.html">Prevention</a>
+          <a href="how-it-works.html">How It Works</a>
+        </nav>
+
+        <div class="navbar-right-actions">
+          <a href="../login.html" class="nav-auth-btn" id="public-nav-auth-btn">Sign In</a>
+        </div>
+
+      </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="public-main-content">
+
+      <!-- PAGE HEADER -->
+      <div class="page-header-public">
+        <h1>Health Insights</h1>
+        <p>Understand how disease activity is changing across monitored demonstration regions through clear visualizations and plain-language interpretations.</p>
+      </div>
+
+      <!-- TREND SUMMARY CARDS -->
+      <div class="public-card-grid-4">
+        <div class="public-metric-card">
+          <div style="font-size:0.8rem; font-weight:700; color:var(--text-muted); text-transform:uppercase; margin-bottom:4px;">Dengue Trajectory</div>
+          <div style="font-size:1.35rem; font-weight:800; color:var(--primary-navy); display:flex; align-items:center; gap:0.4rem;">
+            🦟 Dengue <span class="trend-up" style="font-size:1rem;">↑ Increasing</span>
+          </div>
+          <div style="font-size:0.85rem; color:var(--text-muted); margin-top:6px;">Accelerating in Metropolis & Coast City</div>
+        </div>
+
+        <div class="public-metric-card">
+          <div style="font-size:0.8rem; font-weight:700; color:var(--text-muted); text-transform:uppercase; margin-bottom:4px;">Flu Trajectory</div>
+          <div style="font-size:1.35rem; font-weight:800; color:var(--primary-navy); display:flex; align-items:center; gap:0.4rem;">
+            🤧 Influenza <span class="trend-up" style="font-size:1rem; color:#b91c1c;">↑ Peak Spike</span>
+          </div>
+          <div style="font-size:0.85rem; color:var(--text-muted); margin-top:6px;">High seasonal burden in Gotham</div>
+        </div>
+
+        <div class="public-metric-card">
+          <div style="font-size:0.8rem; font-weight:700; color:var(--text-muted); text-transform:uppercase; margin-bottom:4px;">COVID-19 Trajectory</div>
+          <div style="font-size:1.35rem; font-weight:800; color:var(--primary-navy); display:flex; align-items:center; gap:0.4rem;">
+            🦠 COVID-19 <span class="trend-down" style="font-size:1rem;">↓ Decreasing</span>
+          </div>
+          <div style="font-size:0.85rem; color:var(--text-muted); margin-top:6px;">Steady decline across all cities</div>
+        </div>
+
+        <div class="public-metric-card">
+          <div style="font-size:0.8rem; font-weight:700; color:var(--text-muted); text-transform:uppercase; margin-bottom:4px;">Cholera Trajectory</div>
+          <div style="font-size:1.35rem; font-weight:800; color:var(--primary-navy); display:flex; align-items:center; gap:0.4rem;">
+            💧 Cholera <span class="trend-up" style="font-size:1rem;">↑ Slight Rise</span>
+          </div>
+          <div style="font-size:0.85rem; color:var(--text-muted); margin-top:6px;">Water monitoring active in Coast City</div>
+        </div>
+      </div>
+
+      <!-- CHART 1 — TIME SERIES -->
+      <section class="public-chart-card">
+        <div class="chart-card-header">
+          <div>
+            <h3>Disease Activity Over Time</h3>
+            <p style="font-size:0.875rem; color:var(--text-muted); margin-top:2px;">Compare historical trends and trajectory for primary monitored conditions.</p>
+          </div>
+          <div class="chart-time-selectors">
+            <button class="chart-time-btn" data-range="1M">1M</button>
+            <button class="chart-time-btn active" data-range="3M">3M</button>
+            <button class="chart-time-btn" data-range="6M">6M</button>
+            <button class="chart-time-btn" data-range="1Y">1Y</button>
+          </div>
+        </div>
+
+        <div class="echart-container-public" id="insights-line-chart"></div>
+
+        <div class="plain-language-box">
+          <i data-lucide="help-circle" class="plain-language-icon"></i>
+          <div class="plain-language-content">
+            <h4>What does this mean?</h4>
+            <p id="plain-language-dynamic-txt">During the recent 3-month surveillance window, Dengue activity has increased significantly in monitored urban zones. Residents in high-risk regions should consider following vector control precautions.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- TWO SIDE-BY-SIDE CHARTS -->
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.75rem; margin-bottom:3rem;">
+        
+        <!-- CHART 2 — MOST ACTIVE DISEASES -->
+        <div class="public-chart-card" style="margin-bottom:0;">
+          <div class="chart-card-header">
+            <h3>Most Active Diseases</h3>
+          </div>
+          <div class="echart-container-public" id="insights-active-diseases-chart" style="height:300px;"></div>
+        </div>
+
+        <!-- CHART 3 — REGIONAL COMPARISON -->
+        <div class="public-chart-card" style="margin-bottom:0;">
+          <div class="chart-card-header">
+            <h3>Regional Activity Burden</h3>
+          </div>
+          <div class="echart-container-public" id="insights-regional-chart" style="height:300px;"></div>
+        </div>
+
+      </div>
+
+      <!-- INSIGHT CARDS -->
+      <section style="margin-bottom:3rem;">
+        <div class="section-title-group">
+          <h2>Key Health Takeaways</h2>
+          <p>Synthesized insights from current health surveillance data.</p>
+        </div>
+
+        <div class="disease-card-grid">
+          
+          <div class="disease-public-card">
+            <div style="font-size:0.75rem; font-weight:700; color:var(--risk-high); text-transform:uppercase; margin-bottom:4px;">Rising Activity</div>
+            <h3 style="font-size:1.15rem; color:var(--primary-navy); margin-bottom:0.5rem;">Mosquito Vector Surge</h3>
+            <p style="font-size:0.9rem; color:var(--text-muted); line-height:1.5;">Dengue vector breeding is accelerating in Metropolis due to recent rainfall. Community container cleaning campaigns are strongly advised.</p>
+          </div>
+
+          <div class="disease-public-card">
+            <div style="font-size:0.75rem; font-weight:700; color:var(--brand-blue); text-transform:uppercase; margin-bottom:4px;">Stable Activity</div>
+            <h3 style="font-size:1.15rem; color:var(--primary-navy); margin-bottom:0.5rem;">Respiratory Baseline</h3>
+            <p style="font-size:0.9rem; color:var(--text-muted); line-height:1.5;">COVID-19 sub-variant activity has leveled off at manageable baseline levels across Star City and Central City.</p>
+          </div>
+
+          <div class="disease-public-card">
+            <div style="font-size:0.75rem; font-weight:700; color:var(--risk-low); text-transform:uppercase; margin-bottom:4px;">Improving Activity</div>
+            <h3 style="font-size:1.15rem; color:var(--primary-navy); margin-bottom:0.5rem;">Central City Recovery</h3>
+            <p style="font-size:0.9rem; color:var(--text-muted); line-height:1.5;">Central City reports a 8.5% decline in weekly vector cases following targeted municipal larvicide treatments.</p>
+          </div>
+
+          <div class="disease-public-card">
+            <div style="font-size:0.75rem; font-weight:700; color:var(--risk-critical); text-transform:uppercase; margin-bottom:4px;">Highest Risk Zone</div>
+            <h3 style="font-size:1.15rem; color:var(--primary-navy); margin-bottom:0.5rem;">Gotham City Flu Peak</h3>
+            <p style="font-size:0.9rem; color:var(--text-muted); line-height:1.5;">Gotham City currently experiences the highest total disease burden driven by a winter influenza surge.</p>
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="public-footer">
+      <div class="public-footer-container">
+        <div class="footer-disclaimer-box">
+          <strong>Medical & Simulation Disclaimer:</strong> Information provided by HealthPulse Public Portal is for health awareness and educational purposes and does not replace professional medical advice.
+        </div>
+        <div class="footer-bottom">
+          <div>&copy; 2026 HealthPulse Health Intelligence Platform.</div>
+          <div style="color:var(--text-light);">Designed for Public Awareness & Citizen Empowerment.</div>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/realtime.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/public/public-common.js"></script>
+  <script src="../js/public/health-insights.js"></script>
+
+</body>
+</html>

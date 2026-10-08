@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Health Risk Map — HealthPulse Public Portal</title>
+  <meta name="description" content="Interactive public health surveillance risk map showing disease hotspots and regional risk levels.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+  <link rel="stylesheet" href="../css/public.css">
+  <link rel="stylesheet" href="../css/public-components.css">
+  <link rel="stylesheet" href="../css/public-responsive.css">
+</head>
+<body>
+
+  <div class="public-page-wrapper">
+
+    <!-- NAVIGATION BAR -->
+    <header class="public-navbar">
+      <div class="public-navbar-container">
+        
+        <a href="index.html" class="brand-logo-public">
+          <div class="brand-logo-icon"><i data-lucide="shield-check"></i></div>
+          <div class="brand-text-block">
+            <span class="brand-title">HealthPulse</span>
+            <span class="brand-subtitle">Public Portal</span>
+          </div>
+        </a>
+
+        <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle navigation menu">
+          <i data-lucide="menu"></i>
+        </button>
+
+        <nav class="nav-links-public" id="nav-links-public">
+          <a href="index.html">Home</a>
+          <a href="disease-outbreaks.html">Disease Outbreaks</a>
+          <a href="health-risk-map.html" class="active">Risk Map</a>
+          <a href="health-insights.html">Health Insights</a>
+          <a href="prevention.html">Prevention</a>
+          <a href="how-it-works.html">How It Works</a>
+        </nav>
+
+        <div class="navbar-right-actions">
+          <a href="../login.html" class="nav-auth-btn" id="public-nav-auth-btn">Sign In</a>
+        </div>
+
+      </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="public-main-content">
+
+      <!-- PAGE HEADER -->
+      <div class="page-header-public">
+        <h1>Health Risk Map</h1>
+        <p>Explore geographic health risk levels, pulsing hotspot clusters, and localized precautions across monitored demonstration cities.</p>
+      </div>
+
+      <!-- MAP CONTROLS & FILTERS -->
+      <div style="background:#ffffff; border:1px solid var(--border-light); border-radius:var(--radius-xl); padding:1.25rem 1.75rem; margin-bottom:1.5rem; box-shadow:var(--shadow-sm); display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem;">
+        <div style="display:flex; align-items:center; gap:1rem; flex-wrap:wrap;">
+          <div style="position:relative; min-width:220px;">
+            <input type="text" id="map-search-input" placeholder="Search a location..." style="width:100%; padding:0.6rem 0.85rem 0.6rem 2.25rem; border:1px solid var(--border-light); border-radius:var(--radius-full); font-size:0.875rem;" />
+            <i data-lucide="search" style="position:absolute; left:0.75rem; top:0.65rem; color:var(--text-muted); width:16px; height:16px;"></i>
+          </div>
+
+          <select id="map-filter-disease" class="select-custom" style="padding-top:0.5rem; padding-bottom:0.5rem; min-width:180px; font-size:0.875rem;">
+            <option value="all">All Diseases</option>
+            <option value="dengue">Dengue</option>
+            <option value="influenza">Influenza</option>
+            <option value="covid-19">COVID-19</option>
+            <option value="cholera">Cholera</option>
+          </select>
+
+          <select id="map-filter-risk" class="select-custom" style="padding-top:0.5rem; padding-bottom:0.5rem; min-width:160px; font-size:0.875rem;">
+            <option value="all">All Risk Levels</option>
+            <option value="low">Low Risk</option>
+            <option value="moderate">Moderate Risk</option>
+            <option value="high">High Risk</option>
+            <option value="critical">Critical Risk</option>
+          </select>
+        </div>
+
+        <label style="display:inline-flex; align-items:center; gap:0.5rem; font-size:0.875rem; font-weight:600; color:var(--text-heading); cursor:pointer;">
+          <input type="checkbox" id="map-toggle-rising" style="width:16px; height:16px; accent-color:var(--brand-blue);" />
+          <span>Show only rising activity</span>
+        </label>
+      </div>
+
+      <!-- MAP LAYOUT WITH SIDE PANEL -->
+      <div class="public-map-layout">
+        
+        <div class="public-map-container">
+          <div id="public-leaflet-map"></div>
+        </div>
+
+        <div class="map-region-side-panel">
+          <div>
+            <div style="font-size:0.75rem; font-weight:700; color:var(--brand-blue); text-transform:uppercase; margin-bottom:4px;">Region Inspector</div>
+            <h3 id="map-panel-region-name" style="font-size:1.4rem; color:var(--primary-navy); margin-bottom:0.5rem;">Metropolis</h3>
+            <span class="risk-badge high" id="map-panel-risk-badge" style="margin-bottom:1.25rem;">HIGH RISK</span>
+
+            <div style="display:flex; flex-direction:column; gap:0.9rem; background:var(--bg-subtle); padding:1rem; border-radius:var(--radius-md); border:1px solid var(--border-light); margin-bottom:1.25rem;">
+              <div style="display:flex; justify-content:space-between; font-size:0.875rem;">
+                <span style="color:var(--text-muted);">Most Active Disease:</span>
+                <strong id="map-panel-disease" style="color:var(--primary-navy);">Dengue</strong>
+              </div>
+              <div style="display:flex; justify-content:space-between; font-size:0.875rem;">
+                <span style="color:var(--text-muted);">Recent Case Trend:</span>
+                <strong id="map-panel-trend" class="trend-up">↑ Increasing (+18.4%)</strong>
+              </div>
+              <div style="display:flex; justify-content:space-between; font-size:0.875rem;">
+                <span style="color:var(--text-muted);">Reported Cases:</span>
+                <strong id="map-panel-cases" style="color:var(--primary-navy);">3,035</strong>
+              </div>
+            </div>
+
+            <div>
+              <div style="font-size:0.8rem; font-weight:700; color:var(--text-muted); text-transform:uppercase; margin-bottom:4px;">Recommended Precaution</div>
+              <p id="map-panel-precaution" style="font-size:0.875rem; color:var(--text-body); line-height:1.5;">Consider following mosquito-bite prevention measures and eliminating standing water around living spaces.</p>
+            </div>
+          </div>
+
+          <a href="prevention.html?disease=Dengue" id="map-panel-cta-btn" class="btn-primary-public" style="justify-content:center; width:100%; margin-top:1.5rem;">
+            View Detailed Precautions <i data-lucide="arrow-right"></i>
+          </a>
+        </div>
+
+      </div>
+
+      <!-- LEGEND & DISCLAIMER -->
+      <div style="background:#ffffff; border:1px solid var(--border-light); border-radius:var(--radius-lg); padding:1.25rem 1.5rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem;">
+        <div style="display:flex; align-items:center; gap:1.5rem; font-size:0.85rem; font-weight:600;">
+          <span style="color:var(--text-muted);">Risk Scale Legend:</span>
+          <span style="display:inline-flex; align-items:center; gap:0.4rem;"><span class="status-dot low"></span> Low Risk</span>
+          <span style="display:inline-flex; align-items:center; gap:0.4rem;"><span class="status-dot moderate"></span> Moderate Risk</span>
+          <span style="display:inline-flex; align-items:center; gap:0.4rem;"><span class="status-dot high"></span> High Risk</span>
+          <span style="display:inline-flex; align-items:center; gap:0.4rem;"><span class="status-dot critical"></span> Critical Risk</span>
+        </div>
+        <div style="font-size:0.8rem; color:var(--text-muted);">
+          <i data-lucide="info" style="width:14px; vertical-align:middle;"></i> Marker size scales with relative simulated case burden.
+        </div>
+      </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="public-footer">
+      <div class="public-footer-container">
+        <div class="footer-disclaimer-box">
+          <strong>Map Notice:</strong> Risk levels shown on the map are based on monitored demonstration data and are intended for public health awareness purposes only.
+        </div>
+        <div class="footer-bottom">
+          <div>&copy; 2026 HealthPulse Health Intelligence Platform.</div>
+          <div style="color:var(--text-light);">Designed for Public Awareness & Citizen Empowerment.</div>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/realtime.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/public/public-common.js"></script>
+  <script src="../js/public/risk-map.js"></script>
+
+</body>
+</html>

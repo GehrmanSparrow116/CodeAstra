@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HealthPulse — Disease Trends & Analytics</title>
+  <meta name="description" content="Monitor disease progression, growth patterns and hospitalization trends across monitored regions.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/pages.css">
+</head>
+<body>
+
+  <div class="app-container">
+    
+    <!-- LEFT SIDEBAR NAVIGATION -->
+    <aside class="sidebar" id="sidebar">
+      <div>
+        <div class="sidebar-header">
+          <a href="../admin-overview.html" class="brand-logo-container">
+            <div class="brand-icon-wrapper">
+              <i data-lucide="radio"></i>
+            </div>
+            <div class="brand-text-wrapper">
+              <div class="brand-name">HealthPulse</div>
+              <div class="brand-subtitle">Health Intelligence Platform</div>
+            </div>
+          </a>
+          <button class="sidebar-collapse-btn" id="sidebar-collapse-btn" title="Toggle Navigation Rail">
+            <i data-lucide="chevron-left"></i>
+          </button>
+        </div>
+
+        <nav class="sidebar-nav-content">
+          <div class="nav-section-title">Dashboard</div>
+          <a href="../admin-overview.html" class="nav-item">
+            <i data-lucide="home"></i>
+            <span>Overview</span>
+          </a>
+
+          <div class="nav-section-title">Monitoring</div>
+          <a href="disease-trends.html" class="nav-item active">
+            <i data-lucide="trending-up"></i>
+            <span>Disease Trends</span>
+          </a>
+          <a href="outbreaks.html" class="nav-item">
+            <i data-lucide="activity"></i>
+            <span>Outbreaks</span>
+          </a>
+          <a href="hotspots.html" class="nav-item">
+            <i data-lucide="map-pin"></i>
+            <span>Hotspots</span>
+          </a>
+
+          <div class="nav-section-title">Intelligence</div>
+          <a href="predictions.html" class="nav-item">
+            <i data-lucide="bar-chart-2"></i>
+            <span>Predictions</span>
+          </a>
+          <a href="early-warning.html" class="nav-item">
+            <i data-lucide="bell"></i>
+            <span>Early Warning</span>
+          </a>
+          <a href="ai-insights.html" class="nav-item">
+            <i data-lucide="sparkles"></i>
+            <span>AI Insights</span>
+          </a>
+
+          <div class="nav-section-title">Data</div>
+          <a href="data-explorer.html" class="nav-item">
+            <i data-lucide="database"></i>
+            <span>Data Explorer</span>
+          </a>
+          <a href="historical.html" class="nav-item">
+            <i data-lucide="history"></i>
+            <span>Historical</span>
+          </a>
+
+          <div class="nav-section-title">System</div>
+          <a href="settings.html" class="nav-item">
+            <i data-lucide="settings"></i>
+            <span>Settings</span>
+          </a>
+          <a href="profile.html" class="nav-item">
+            <i data-lucide="user"></i>
+            <span>Profile</span>
+          </a>
+        </nav>
+      </div>
+
+      <!-- User Profile Footer -->
+      <div class="sidebar-footer">
+        <a href="profile.html" class="user-profile-card" style="text-decoration:none;">
+          <div class="avatar-badge-wrapper">
+            <div class="user-avatar">DS</div>
+            <span class="status-indicator-dot"></span>
+          </div>
+          <div class="user-info-text">
+            <div class="user-name">Dr. Sharma</div>
+            <div class="user-role">Healthcare Professional</div>
+          </div>
+        </a>
+        <div class="signout-action-btn">
+          <i data-lucide="log-out"></i>
+          <span>Sign Out</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN WRAPPER -->
+    <div class="main-wrapper">
+
+      <!-- TOP HEADER -->
+      <header class="top-header">
+        <div class="header-left-tools">
+          <div class="global-search-container">
+            <i data-lucide="search"></i>
+            <input type="text" id="global-search-input" class="global-search-input" placeholder="Search disease, region, or keyword..." />
+            <span class="kbd-shortcut">Ctrl K</span>
+          </div>
+        </div>
+
+        <div class="header-right-tools">
+          <div class="date-range-picker">
+            <i data-lucide="calendar"></i>
+            <span>Jan 1, 2023 – Dec 31, 2023</span>
+            <i data-lucide="chevron-down" style="width: 14px; height: 14px;"></i>
+          </div>
+
+          <div class="live-status-group">
+            <span id="live-time-ticker" class="live-clock-badge">10:42:18</span>
+            <div class="live-indicator-pill" id="live-indicator-pill">
+              <span class="pulse-dot"></span>
+              <span id="live-status-text">Simulated Live Feed</span>
+            </div>
+          </div>
+
+          <button class="header-icon-btn" title="Surveillance Notifications">
+            <i data-lucide="bell"></i>
+            <span class="notification-badge"></span>
+          </button>
+
+          <a href="profile.html" class="header-user-avatar" style="text-decoration:none;">DS</a>
+        </div>
+      </header>
+
+      <!-- PAGE CONTENT -->
+      <main class="dashboard-content">
+
+        <!-- Page Header Banner -->
+        <div class="page-header-banner">
+          <div class="page-title-group">
+            <h1>Disease Trends & Analytics</h1>
+            <p>Monitor disease progression, growth patterns, and hospitalization trajectories across monitored regions.</p>
+          </div>
+          <div class="page-actions-group">
+            <button class="action-btn-secondary" onclick="window.print()">
+              <i data-lucide="download" style="width: 14px; height: 14px;"></i>
+              <span>Export Report</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- KPI Strip -->
+        <section class="kpi-cards-grid">
+          <div class="kpi-card">
+            <div class="kpi-top-row">
+              <div class="kpi-icon-pill blue"><i data-lucide="users"></i></div>
+            </div>
+            <div>
+              <div class="kpi-title">Total Monitored Cases</div>
+              <div class="kpi-number-row"><span class="kpi-value">12,482</span></div>
+              <div class="kpi-trend-row"><span class="trend-badge up-green">↑ 12.4%</span><span>vs last month</span></div>
+            </div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-top-row">
+              <div class="kpi-icon-pill red"><i data-lucide="activity"></i></div>
+            </div>
+            <div>
+              <div class="kpi-title">Fastest Growing Disease</div>
+              <div class="kpi-number-row"><span class="kpi-value" style="font-size:1.45rem;">Dengue</span></div>
+              <div class="kpi-trend-row"><span class="trend-badge up-red">↑ 32.4% growth</span></div>
+            </div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-top-row">
+              <div class="kpi-icon-pill orange"><i data-lucide="hospital"></i></div>
+            </div>
+            <div>
+              <div class="kpi-title">Total Hospitalizations</div>
+              <div class="kpi-number-row"><span class="kpi-value">1,840</span></div>
+              <div class="kpi-trend-row"><span class="trend-badge up-orange">14.7% admission rate</span></div>
+            </div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-top-row">
+              <div class="kpi-icon-pill teal"><i data-lucide="trending-up"></i></div>
+            </div>
+            <div>
+              <div class="kpi-title">Average Daily Cases</div>
+              <div class="kpi-number-row"><span class="kpi-value">416</span></div>
+              <div class="kpi-trend-row"><span class="trend-badge up-green">Across 5 regions</span></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Main Trend Chart -->
+        <section class="chart-card" style="margin-bottom: 20px;">
+          <div class="card-header-bar">
+            <div class="card-title-group">
+              <div class="card-title">Multi-Series Disease Trajectory</div>
+              <span class="live-stream-badge">
+                <span class="pulse-dot-sm"></span>
+                <span>TIME-SERIES</span>
+              </span>
+            </div>
+            <div class="card-controls-group">
+              <select class="custom-select" id="disease-filter-select">
+                <option value="All Diseases">All Diseases</option>
+                <option value="Influenza">Influenza</option>
+                <option value="Dengue">Dengue</option>
+                <option value="COVID-19">COVID-19</option>
+                <option value="Cholera">Cholera</option>
+                <option value="Typhoid">Typhoid</option>
+              </select>
+
+              <select class="custom-select" id="region-filter-select">
+                <option value="All Regions">All Regions</option>
+                <option value="Gotham">Gotham</option>
+                <option value="Metropolis">Metropolis</option>
+                <option value="Coast City">Coast City</option>
+                <option value="Star City">Star City</option>
+                <option value="Central City">Central City</option>
+              </select>
+
+              <div class="timeframe-pill-group">
+                <button class="time-btn" data-timeframe="1M">1M</button>
+                <button class="time-btn" data-timeframe="3M">3M</button>
+                <button class="time-btn" data-timeframe="6M">6M</button>
+                <button class="time-btn active" data-timeframe="1Y">1Y</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="custom-chart-legend">
+            <div class="legend-item"><span class="legend-dot" style="background-color: #2563eb;"></span><span>Total Cases</span></div>
+            <div class="legend-item"><span class="legend-dot" style="background-color: #ef4444;"></span><span>Hospitalizations</span></div>
+          </div>
+
+          <div id="main-disease-trend-chart" style="width: 100%; height: 360px; min-height: 360px;"></div>
+        </section>
+
+        <!-- Secondary Charts Grid -->
+        <div class="page-grid-3col">
+          <!-- Distribution Donut -->
+          <div class="chart-card">
+            <div class="card-header-bar">
+              <div class="card-title">Disease Distribution</div>
+            </div>
+            <div id="disease-dist-donut" style="width: 100%; height: 260px; min-height: 260px;"></div>
+          </div>
+
+          <!-- Hospitalization Burden -->
+          <div class="chart-card">
+            <div class="card-header-bar">
+              <div class="card-title">Hospitalization Burden</div>
+            </div>
+            <div id="hosp-trend-chart" style="width: 100%; height: 260px; min-height: 260px;"></div>
+          </div>
+
+          <!-- Growth Rate Comparison -->
+          <div class="chart-card">
+            <div class="card-header-bar">
+              <div class="card-title">Growth Rate by Pathogen</div>
+            </div>
+            <div id="growth-rate-bar-chart" style="width: 100%; height: 260px; min-height: 260px;"></div>
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+  <script src="../js/config.js"></script>
+  <script src="../js/shared.js"></script>
+  <script src="../js/pages/disease-trends.js"></script>
+</body>
+</html>

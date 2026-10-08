@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Disease Outbreaks — HealthPulse Public Portal</title>
+  <meta name="description" content="Explore current disease activity, case counts, and risk levels across monitored regions.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../css/public.css">
+  <link rel="stylesheet" href="../css/public-components.css">
+  <link rel="stylesheet" href="../css/public-responsive.css">
+</head>
+<body>
+
+  <div class="public-page-wrapper">
+
+    <!-- NAVIGATION BAR -->
+    <header class="public-navbar">
+      <div class="public-navbar-container">
+        
+        <a href="index.html" class="brand-logo-public">
+          <div class="brand-logo-icon"><i data-lucide="shield-check"></i></div>
+          <div class="brand-text-block">
+            <span class="brand-title">HealthPulse</span>
+            <span class="brand-subtitle">Public Portal</span>
+          </div>
+        </a>
+
+        <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle navigation menu">
+          <i data-lucide="menu"></i>
+        </button>
+
+        <nav class="nav-links-public" id="nav-links-public">
+          <a href="index.html">Home</a>
+          <a href="disease-outbreaks.html" class="active">Disease Outbreaks</a>
+          <a href="health-risk-map.html">Risk Map</a>
+          <a href="health-insights.html">Health Insights</a>
+          <a href="prevention.html">Prevention</a>
+          <a href="how-it-works.html">How It Works</a>
+        </nav>
+
+        <div class="navbar-right-actions">
+          <a href="../login.html" class="nav-auth-btn" id="public-nav-auth-btn">Sign In</a>
+        </div>
+
+      </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="public-main-content">
+
+      <!-- PAGE HEADER -->
+      <div class="page-header-public">
+        <h1>Disease Outbreaks</h1>
+        <p>Explore current disease activity and understand where risks are increasing across monitored demonstration regions.</p>
+      </div>
+
+      <!-- FILTERS -->
+      <div style="background:#ffffff; border:1px solid var(--border-light); border-radius:var(--radius-xl); padding:1.5rem 2rem; margin-bottom:2.5rem; box-shadow:var(--shadow-sm);">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:1rem; flex-wrap:wrap; gap:0.5rem;">
+          <h3 style="font-size:1.1rem; color:var(--primary-navy); display:flex; align-items:center; gap:0.5rem;">
+            <i data-lucide="sliders-horizontal" style="width:18px; color:var(--brand-blue);"></i> Filter Outbreaks
+          </h3>
+          <span style="font-size:0.85rem; color:var(--text-muted);">Showing simulated health surveillance data</span>
+        </div>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:1rem;">
+          <div>
+            <label style="display:block; font-size:0.8rem; font-weight:700; color:var(--text-muted); text-transform:uppercase; margin-bottom:4px;">Disease</label>
+            <select id="filter-disease" class="select-custom" style="width:100%; min-width:0;">
+              <option value="all">All Diseases</option>
+              <option value="dengue">Dengue Fever</option>
+              <option value="influenza">Seasonal Influenza</option>
+              <option value="covid19">COVID-19</option>
+              <option value="cholera">Cholera</option>
+            </select>
+          </div>
+
+          <div>
+            <label style="display:block; font-size:0.8rem; font-weight:700; color:var(--text-muted); text-transform:uppercase; margin-bottom:4px;">Region</label>
+            <select id="filter-region" class="select-custom" style="width:100%; min-width:0;">
+              <option value="all">All Regions</option>
+              <option value="Metropolis">Metropolis</option>
+              <option value="Gotham">Gotham City</option>
+              <option value="Star City">Star City</option>
+              <option value="Central City">Central City</option>
+              <option value="Coast City">Coast City</option>
+            </select>
+          </div>
+
+          <div>
+            <label style="display:block; font-size:0.8rem; font-weight:700; color:var(--text-muted); text-transform:uppercase; margin-bottom:4px;">Risk Level</label>
+            <select id="filter-risk" class="select-custom" style="width:100%; min-width:0;">
+              <option value="all">All Risk Levels</option>
+              <option value="low">Low Risk</option>
+              <option value="moderate">Moderate Risk</option>
+              <option value="high">High Risk</option>
+              <option value="critical">Critical Risk</option>
+            </select>
+          </div>
+
+          <div>
+            <label style="display:block; font-size:0.8rem; font-weight:700; color:var(--text-muted); text-transform:uppercase; margin-bottom:4px;">Activity Status</label>
+            <select id="filter-status" class="select-custom" style="width:100%; min-width:0;">
+              <option value="all">All Statuses</option>
+              <option value="increasing">↑ Increasing Trend</option>
+              <option value="stable">→ Stable Trend</option>
+              <option value="decreasing">↓ Decreasing Trend</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- OUTBREAK CARDS GRID -->
+      <div id="outbreaks-card-grid" class="disease-card-grid">
+        <!-- Rendered dynamically by outbreaks.js -->
+      </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="public-footer">
+      <div class="public-footer-container">
+        <div class="footer-disclaimer-box">
+          <strong>Medical & Simulation Disclaimer:</strong> Information provided by HealthPulse Public Portal is for health awareness and educational purposes and does not replace professional medical advice.
+        </div>
+        <div class="footer-bottom">
+          <div>&copy; 2026 HealthPulse Health Intelligence Platform.</div>
+          <div style="color:var(--text-light);">Designed for Public Awareness & Citizen Empowerment.</div>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="../js/config.js"></script>
+  <script src="../js/realtime.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/public/public-common.js"></script>
+  <script src="../js/public/outbreaks.js"></script>
+
+</body>
+</html>

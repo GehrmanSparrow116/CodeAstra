@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HealthPulse — Early Detection. Safer Communities.</title>
+  <meta name="description" content="HealthPulse is a health intelligence platform designed to monitor disease activity, identify emerging risks, and provide actionable health insights.">
+
+  <!-- Google Fonts: Outfit & Inter for clean healthcare typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/landing.css">
+</head>
+<body class="landing-page">
+
+  <!-- ====================================================================
+       COMMON LANDING PAGE NAVBAR
+       ==================================================================== -->
+  <header class="landing-header">
+    <div class="landing-nav-container">
+      
+      <a href="index.html" class="brand-logo-container">
+        <div class="brand-icon-wrapper">
+          <i data-lucide="shield-check"></i>
+        </div>
+        <div class="brand-text-block">
+          <span class="brand-title">HealthPulse</span>
+          <span class="brand-subtitle">Health Intelligence</span>
+        </div>
+      </a>
+
+      <nav class="landing-nav-links">
+        <a href="#hero">Home</a>
+        <a href="#what-is-healthpulse">Platform</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#roles">For Professionals</a>
+        <a href="#roles">For Public</a>
+      </nav>
+
+      <div>
+        <a href="login.html" class="btn-landing-signin">
+          <span>Sign In</span>
+          <i data-lucide="arrow-right" style="width:16px;"></i>
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ====================================================================
+         1. HERO SECTION
+         ==================================================================== -->
+    <section class="landing-section" id="hero">
+      <div class="hero-landing-grid">
+        
+        <div>
+          <div style="display:inline-flex; align-items:center; gap:0.5rem; padding:0.4rem 1rem; background:#eff6ff; color:var(--landing-blue); font-size:0.85rem; font-weight:700; border-radius:9999px; margin-bottom:1.25rem;">
+            <i data-lucide="activity" style="width:16px;"></i> Health Outbreak Detection & Early Warning System
+          </div>
+
+          <h1 class="hero-heading">
+            Early Detection.<br>
+            <span>Safer Communities.</span>
+          </h1>
+
+          <p class="hero-subtext">
+            HealthPulse is a health intelligence platform designed to monitor disease activity, identify emerging health risks, and turn complex health data into actionable insights.
+          </p>
+
+          <div class="hero-btn-group">
+            <a href="#what-is-healthpulse" class="btn-landing-primary">
+              <span>Explore HealthPulse</span>
+              <i data-lucide="chevron-down" style="width:18px;"></i>
+            </a>
+            <a href="login.html" class="btn-landing-outline">
+              <span>Sign In</span>
+              <i data-lucide="log-in" style="width:18px;"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- HERO RIGHT UI DATA VISUALIZATION -->
+        <div class="hero-visual-container">
+          <div style="font-size:0.8rem; font-weight:700; color:var(--landing-blue); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:1.25rem;">
+            Real-Time Surveillance Pipeline
+          </div>
+
+          <div class="visual-node-flow">
+            <div class="visual-node-card">
+              <div class="visual-node-icon"><i data-lucide="activity"></i></div>
+              <div>
+                <strong style="color:var(--landing-navy); font-size:0.95rem;">Disease Activity Monitoring</strong>
+                <div style="font-size:0.825rem; color:var(--landing-text-muted);">Ingesting case signals across monitored cities</div>
+              </div>
+            </div>
+
+            <div class="visual-node-card">
+              <div class="visual-node-icon" style="color:#f59e0b;"><i data-lucide="scan-eye"></i></div>
+              <div>
+                <strong style="color:var(--landing-navy); font-size:0.95rem;">Risk & Anomaly Detection</strong>
+                <div style="font-size:0.825rem; color:var(--landing-text-muted);">Identifying trajectory spikes early</div>
+              </div>
+            </div>
+
+            <div class="visual-node-card">
+              <div class="visual-node-icon" style="color:#ef4444;"><i data-lucide="alert-triangle"></i></div>
+              <div>
+                <strong style="color:var(--landing-navy); font-size:0.95rem;">Early Warning Intelligence</strong>
+                <div style="font-size:0.825rem; color:var(--landing-text-muted);">Generating automated threshold advisories</div>
+              </div>
+            </div>
+
+            <div class="visual-node-card" style="background:#eff6ff; border-color:#bfdbfe;">
+              <div class="visual-node-icon" style="color:#10b981;"><i data-lucide="shield-check"></i></div>
+              <div>
+                <strong style="color:var(--landing-navy); font-size:0.95rem;">Public Awareness & Action</strong>
+                <div style="font-size:0.825rem; color:var(--landing-text-muted);">Empowering communities with preventive guidance</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         2. WHAT IS HEALTHPULSE?
+         ==================================================================== -->
+    <section class="landing-section" id="what-is-healthpulse">
+      <div class="section-header-center">
+        <h2>What is HealthPulse?</h2>
+        <p>HealthPulse transforms health-related data into understandable disease activity, regional risk information, early warning signals and actionable public health insights.</p>
+      </div>
+
+      <div class="feature-card-grid">
+        <div class="landing-card">
+          <div class="landing-card-icon">🦠</div>
+          <h3>Disease Monitoring</h3>
+          <p>Track disease activity and emerging outbreak patterns across monitored municipal sectors.</p>
+        </div>
+
+        <div class="landing-card">
+          <div class="landing-card-icon">📍</div>
+          <h3>Regional Risk</h3>
+          <p>Understand where health risks are increasing with clear color-coded geographic maps.</p>
+        </div>
+
+        <div class="landing-card">
+          <div class="landing-card-icon">⚠️</div>
+          <h3>Early Warning</h3>
+          <p>Identify unusual statistical shifts and emerging risks before major surges occur.</p>
+        </div>
+
+        <div class="landing-card">
+          <div class="landing-card-icon">🛡️</div>
+          <h3>Prevention & Action</h3>
+          <p>Turn complex health intelligence into practical preventive steps and community defense.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         3. WHAT HEALTHPULSE PROVIDES
+         ==================================================================== -->
+    <section class="landing-section" style="background:#ffffff; border-top:1px solid var(--landing-border); border-bottom:1px solid var(--landing-border);">
+      <div class="section-header-center">
+        <h2>What HealthPulse Provides</h2>
+        <p>Comprehensive tools designed for both citizen awareness and healthcare decision-making.</p>
+      </div>
+
+      <div class="feature-card-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+        
+        <div class="landing-card">
+          <div class="landing-card-icon" style="background:#eff6ff; color:#2563eb;"><i data-lucide="virus"></i></div>
+          <h3>Disease Outbreak Monitoring</h3>
+          <p>Track case tallies, weekly growth rates, and active outbreak statuses in real time.</p>
+        </div>
+
+        <div class="landing-card">
+          <div class="landing-card-icon" style="background:#fff7ed; color:#f97316;"><i data-lucide="map-pin"></i></div>
+          <h3>Regional Health Risk</h3>
+          <p>Geographic risk maps categorizing districts into Low, Moderate, High, and Critical risk levels.</p>
+        </div>
+
+        <div class="landing-card">
+          <div class="landing-card-icon" style="background:#ecfeff; color:#0891b2;"><i data-lucide="trending-up"></i></div>
+          <h3>Health Trends & Trajectories</h3>
+          <p>Clear line graphs and bar visualizations illustrating short-term and multi-month case movements.</p>
+        </div>
+
+        <div class="landing-card">
+          <div class="landing-card-icon" style="background:#fef2f2; color:#ef4444;"><i data-lucide="bell"></i></div>
+          <h3>Early Warning Intelligence</h3>
+          <p>Automated threshold notifications identifying unusual case increases earlier.</p>
+        </div>
+
+        <div class="landing-card">
+          <div class="landing-card-icon" style="background:#ecfdf5; color:#10b981;"><i data-lucide="shield-check"></i></div>
+          <h3>Prevention & Precautions</h3>
+          <p>Actionable Do/Don't guidance, symptom checklists, and vector control instructions.</p>
+        </div>
+
+        <div class="landing-card">
+          <div class="landing-card-icon" style="background:#f3e8ff; color:#9333ea;"><i data-lucide="bar-chart-3"></i></div>
+          <h3>Data-Driven Insights</h3>
+          <p>Plain-language explanations translating complex data into understandable public health guidance.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         4. HOW HEALTHPULSE WORKS
+         ==================================================================== -->
+    <section class="landing-section" id="how-it-works">
+      <div class="section-header-center">
+        <h2>How HealthPulse Works</h2>
+        <p>A continuous, transparent health intelligence pipeline converting raw signals into early warning and public action.</p>
+      </div>
+
+      <div class="pipeline-nodes-row">
+        <div class="pipeline-node-box">
+          <strong style="color:var(--landing-navy); font-size:0.9rem;">DATA INGESTION</strong>
+          <div style="font-size:0.75rem; color:var(--landing-text-muted);">Signals & Cases</div>
+        </div>
+        <div class="pipeline-arrow">→</div>
+
+        <div class="pipeline-node-box">
+          <strong style="color:var(--landing-navy); font-size:0.9rem;">PROCESSING</strong>
+          <div style="font-size:0.75rem; color:var(--landing-text-muted);">Deduplication</div>
+        </div>
+        <div class="pipeline-arrow">→</div>
+
+        <div class="pipeline-node-box">
+          <strong style="color:var(--landing-navy); font-size:0.9rem;">MONITORING</strong>
+          <div style="font-size:0.75rem; color:var(--landing-text-muted);">4-Wk Baselines</div>
+        </div>
+        <div class="pipeline-arrow">→</div>
+
+        <div class="pipeline-node-box">
+          <strong style="color:var(--landing-navy); font-size:0.9rem;">RISK DETECTION</strong>
+          <div style="font-size:0.75rem; color:var(--landing-text-muted);">Anomaly Scanning</div>
+        </div>
+        <div class="pipeline-arrow">→</div>
+
+        <div class="pipeline-node-box">
+          <strong style="color:var(--landing-navy); font-size:0.9rem;">EARLY WARNING</strong>
+          <div style="font-size:0.75rem; color:var(--landing-text-muted);">Alert Generation</div>
+        </div>
+        <div class="pipeline-arrow">→</div>
+
+        <div class="pipeline-node-box" style="background:#eff6ff; border-color:#bfdbfe;">
+          <strong style="color:var(--landing-blue); font-size:0.9rem;">ACTIONABLE INSIGHTS</strong>
+          <div style="font-size:0.75rem; color:var(--landing-text-muted);">Public Guidance</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         5. BUILT FOR DIFFERENT HEALTH NEEDS (TWO ROLES)
+         ==================================================================== -->
+    <section class="landing-section" id="roles">
+      <div class="section-header-center">
+        <h2>Built for Different Health Needs</h2>
+        <p>Providing specialized experiences tailored for both the general public and healthcare professionals.</p>
+      </div>
+
+      <div class="roles-grid">
+        
+        <!-- CARD 1: PUBLIC PORTAL -->
+        <div class="role-card-public">
+          <div>
+            <div style="font-size:0.8rem; font-weight:700; color:var(--landing-blue); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:0.5rem;">PUBLIC PORTAL</div>
+            <h3 style="font-family:'Outfit', sans-serif; font-size:1.75rem; color:var(--landing-navy); margin-bottom:0.75rem;">For Citizens & Communities</h3>
+            <p style="font-size:0.95rem; color:var(--landing-text-muted); margin-bottom:1.5rem;">
+              Stay informed about local disease activity, check risks in your area, and access practical prevention guidelines.
+            </p>
+            <ul style="list-style:none; display:flex; flex-direction:column; gap:0.75rem; font-size:0.9rem; color:var(--landing-text-body); margin-bottom:2rem;">
+              <li style="display:flex; align-items:center; gap:0.5rem;"><i data-lucide="check" style="color:var(--landing-blue); width:18px;"></i> Outbreak awareness & case counts</li>
+              <li style="display:flex; align-items:center; gap:0.5rem;"><i data-lucide="check" style="color:var(--landing-blue); width:18px;"></i> Interactive health risk map</li>
+              <li style="display:flex; align-items:center; gap:0.5rem;"><i data-lucide="check" style="color:var(--landing-blue); width:18px;"></i> Actionable prevention steps & Do/Don't checklists</li>
+              <li style="display:flex; align-items:center; gap:0.5rem;"><i data-lucide="check" style="color:var(--landing-blue); width:18px;"></i> Plain-language health insights</li>
+            </ul>
+          </div>
+
+          <a href="login.html?role=public" class="btn-landing-primary" style="justify-content:center;">
+            <span>Enter Public Portal</span>
+            <i data-lucide="arrow-right" style="width:18px;"></i>
+          </a>
+        </div>
+
+        <!-- CARD 2: PROFESSIONAL PORTAL -->
+        <div class="role-card-pro">
+          <div>
+            <div style="font-size:0.8rem; font-weight:700; color:#93c5fd; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:0.5rem;">PROFESSIONAL PORTAL</div>
+            <h3 style="font-family:'Outfit', sans-serif; font-size:1.75rem; color:#ffffff; margin-bottom:0.75rem;">For Healthcare & Public Health Teams</h3>
+            <p style="font-size:0.95rem; color:#cbd5e1; margin-bottom:1.5rem;">
+              Advanced epidemiological intelligence, machine learning predictions, Early Warning Scores, and explainable AI insights.
+            </p>
+            <ul style="list-style:none; display:flex; flex-direction:column; gap:0.75rem; font-size:0.9rem; color:#e2e8f0; margin-bottom:2rem;">
+              <li style="display:flex; align-items:center; gap:0.5rem;"><i data-lucide="check" style="color:#60a5fa; width:18px;"></i> Advanced Early Warning Score (EWS) analytics</li>
+              <li style="display:flex; align-items:center; gap:0.5rem;"><i data-lucide="check" style="color:#60a5fa; width:18px;"></i> Explainable AI (XAI) feature weight analysis</li>
+              <li style="display:flex; align-items:center; gap:0.5rem;"><i data-lucide="check" style="color:#60a5fa; width:18px;"></i> Predictive ML outbreak models</li>
+              <li style="display:flex; align-items:center; gap:0.5rem;"><i data-lucide="check" style="color:#60a5fa; width:18px;"></i> Raw dataset exploration & resource planning</li>
+            </ul>
+          </div>
+
+          <a href="login.html?role=professional" class="btn-landing-outline" style="justify-content:center; background:#ffffff; color:var(--landing-navy);">
+            <span>Professional Portal</span>
+            <i data-lucide="arrow-right" style="width:18px;"></i>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         6. WHY HEALTHPULSE?
+         ==================================================================== -->
+    <section class="landing-section">
+      <div class="section-header-center">
+        <h2>Why HealthPulse?</h2>
+        <p>Built to bridge the gap between complex health data and timely public awareness.</p>
+      </div>
+
+      <div class="feature-card-grid">
+        <div class="landing-card">
+          <strong style="color:var(--landing-blue); font-size:0.85rem; text-transform:uppercase;">01. Early Awareness</strong>
+          <h3 style="margin-top:0.4rem;">Identify Shifts Sooner</h3>
+          <p>Detect subtle changes in case trajectories before outbreaks reach crisis levels.</p>
+        </div>
+
+        <div class="landing-card">
+          <strong style="color:var(--landing-blue); font-size:0.85rem; text-transform:uppercase;">02. Clear Information</strong>
+          <p style="margin-top:0.4rem;"><strong>Understandable Insights:</strong> Convert dense epidemiological metrics into clear public health advice.</p>
+        </div>
+
+        <div class="landing-card">
+          <strong style="color:var(--landing-blue); font-size:0.85rem; text-transform:uppercase;">03. Regional Context</strong>
+          <h3 style="margin-top:0.4rem;">Localized Risk Mapping</h3>
+          <p>Understand how health risk varies across specific cities and monitored districts.</p>
+        </div>
+
+        <div class="landing-card">
+          <strong style="color:var(--landing-blue); font-size:0.85rem; text-transform:uppercase;">04. Actionable Guidance</strong>
+          <h3 style="margin-top:0.4rem;">Empowered Communities</h3>
+          <p>Connect disease intelligence directly with practical, evidence-based prevention steps.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         7. FINAL CALL TO ACTION
+         ==================================================================== -->
+    <section class="landing-section" style="text-align:center; background:linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color:#ffffff; border-radius:24px; margin-bottom:5rem; padding:4rem 2rem;">
+      <h2 style="font-family:'Outfit', sans-serif; font-size:2.5rem; font-weight:800; margin-bottom:1rem; color:#ffffff;">
+        Stay Informed. Understand Your Risk. Protect Your Community.
+      </h2>
+      <p style="font-size:1.1rem; color:#cbd5e1; max-width:600px; margin:0 auto 2rem;">
+        Explore HealthPulse's health intelligence platform today.
+      </p>
+      <a href="login.html" class="btn-landing-primary" style="padding:0.9rem 2.25rem; font-size:1.05rem;">
+        <span>Enter HealthPulse</span>
+        <i data-lucide="arrow-right" style="width:20px;"></i>
+      </a>
+    </section>
+
+  </main>
+
+  <!-- ====================================================================
+       FOOTER
+       ==================================================================== -->
+  <footer class="landing-footer">
+    <div style="max-width:var(--landing-max-width); margin:0 auto;">
+      <div style="display:grid; grid-template-columns: 2fr 1fr 1fr; gap:3rem; margin-bottom:3rem;">
+        <div>
+          <h3 style="font-family:'Outfit', sans-serif; font-size:1.35rem; color:#ffffff; margin-bottom:0.75rem; display:flex; align-items:center; gap:0.5rem;">
+            <i data-lucide="shield-check" style="color:var(--landing-blue);"></i> HealthPulse
+          </h3>
+          <p style="font-size:0.9rem; color:#94a3b8; max-width:320px;">
+            Early Detection, Safer Communities. Transforming complex health surveillance data into clear public awareness.
+          </p>
+        </div>
+
+        <div>
+          <h4 style="color:#ffffff; font-size:0.95rem; font-weight:700; margin-bottom:1rem;">Platform</h4>
+          <ul style="list-style:none; display:flex; flex-direction:column; gap:0.5rem; font-size:0.875rem;">
+            <li><a href="#what-is-healthpulse" style="color:#cbd5e1; text-decoration:none;">Disease Outbreaks</a></li>
+            <li><a href="#what-is-healthpulse" style="color:#cbd5e1; text-decoration:none;">Health Risk Map</a></li>
+            <li><a href="#what-is-healthpulse" style="color:#cbd5e1; text-decoration:none;">Health Insights</a></li>
+            <li><a href="#how-it-works" style="color:#cbd5e1; text-decoration:none;">How It Works</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 style="color:#ffffff; font-size:0.95rem; font-weight:700; margin-bottom:1rem;">Access</h4>
+          <ul style="list-style:none; display:flex; flex-direction:column; gap:0.5rem; font-size:0.875rem;">
+            <li><a href="login.html?role=public" style="color:#cbd5e1; text-decoration:none;">Public Portal</a></li>
+            <li><a href="login.html?role=professional" style="color:#cbd5e1; text-decoration:none;">Professional Portal</a></li>
+            <li><a href="login.html" style="color:#cbd5e1; text-decoration:none;">Sign In</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="border-top:1px solid rgba(255,255,255,0.08); padding-top:1.5rem; font-size:0.825rem; color:#64748b; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+        <div>&copy; 2026 HealthPulse Health Intelligence Platform. All rights reserved.</div>
+        <div>Health information is provided for awareness and educational purposes and does not replace professional medical advice.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (typeof lucide !== 'undefined') lucide.createIcons();
+
+      if (typeof gsap !== 'undefined' && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        gsap.from('.hero-heading', { opacity: 0, y: 20, duration: 0.7, ease: 'power2.out' });
+        gsap.from('.hero-subtext', { opacity: 0, y: 20, duration: 0.7, delay: 0.2, ease: 'power2.out' });
+        gsap.from('.hero-visual-container', { opacity: 0, scale: 0.95, duration: 0.8, delay: 0.3, ease: 'power2.out' });
+      }
+    });
+  </script>
+</body>
+</html>

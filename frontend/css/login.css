@@ -1,0 +1,141 @@
+/**
+ * CodeAstra — Health Intelligence Platform
+ * File: css/login.css
+ * Description: Styling for the Prototype Login Page.
+ */
+
+:root {
+  --login-navy: #0f172a;
+  --login-blue: #2563eb;
+  --login-blue-hover: #1d4ed8;
+  --login-bg: #f8fafc;
+  --login-border: #e2e8f0;
+  --login-text-heading: #0f172a;
+  --login-text-body: #334155;
+  --login-text-muted: #64748b;
+}
+
+.login-page-body {
+  font-family: 'Inter', 'Plus Jakarta Sans', sans-serif;
+  background-color: var(--login-bg);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.login-card-container {
+  background: #ffffff;
+  border: 1px solid var(--login-border);
+  border-radius: 24px;
+  width: 100%;
+  max-width: 940px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  overflow: hidden;
+  box-shadow: 0 20px 30px -10px rgba(15, 23, 42, 0.1);
+}
+
+.login-left-banner {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  color: #ffffff;
+  padding: 3.5rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.login-right-form {
+  padding: 3.5rem 2.5rem;
+}
+
+.role-tab-group {
+  display: flex;
+  background: var(--login-bg);
+  padding: 4px;
+  border-radius: 9999px;
+  border: 1px solid var(--login-border);
+  margin-bottom: 1.5rem;
+}
+
+.role-tab-btn {
+  flex: 1;
+  padding: 0.6rem 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--login-text-muted);
+  border: none;
+  background: transparent;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.role-tab-btn.active {
+  background: #ffffff;
+  color: var(--login-blue);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+}
+
+.form-group {
+  margin-bottom: 1.25rem;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--login-text-heading);
+  margin-bottom: 0.4rem;
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--login-border);
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--login-blue);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.btn-login-submit {
+  width: 100%;
+  padding: 0.85rem;
+  background: var(--login-blue);
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 1rem;
+  border: none;
+  border-radius: 9999px;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+  transition: all 0.2s ease;
+}
+
+.btn-login-submit:hover {
+  background: var(--login-blue-hover);
+}
+
+.demo-credentials-box {
+  background: #f1f5f9;
+  border: 1px dashed #cbd5e1;
+  border-radius: 12px;
+  padding: 0.85rem 1rem;
+  font-size: 0.825rem;
+  color: var(--login-text-muted);
+  margin-top: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .login-card-container { grid-template-columns: 1fr; }
+  .login-left-banner { display: none; }
+}

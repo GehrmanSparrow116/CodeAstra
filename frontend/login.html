@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In — HealthPulse Health Intelligence Platform</title>
+  <meta name="description" content="Sign in to HealthPulse Public Portal or Professional Command Center.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/login.css">
+</head>
+<body class="login-page-body">
+
+  <div class="login-card-container">
+    
+    <!-- LEFT BANNER -->
+    <div class="login-left-banner">
+      <div>
+        <a href="index.html" style="display:flex; align-items:center; gap:0.75rem; text-decoration:none; margin-bottom:2.5rem;">
+          <div style="width:40px; height:40px; background:linear-gradient(135deg, #2563eb, #06b6d4); border-radius:10px; display:flex; align-items:center; justify-content:center; color:#ffffff;">
+            <i data-lucide="shield-check"></i>
+          </div>
+          <div>
+            <div style="font-family:'Outfit', sans-serif; font-size:1.3rem; font-weight:800; color:#ffffff;">HealthPulse</div>
+            <div style="font-size:0.7rem; font-weight:700; color:#93c5fd; text-transform:uppercase;">Health Intelligence</div>
+          </div>
+        </a>
+
+        <h2 style="font-family:'Outfit', sans-serif; font-size:2rem; font-weight:800; line-height:1.2; margin-bottom:1rem; color:#ffffff;">
+          Early Detection. Safer Communities.
+        </h2>
+        <p style="font-size:0.95rem; color:#cbd5e1; line-height:1.6;">
+          Transforming complex epidemiological data into clear, actionable public health insights.
+        </p>
+      </div>
+
+      <div style="font-size:0.8rem; color:#94a3b8; border-top:1px solid rgba(255,255,255,0.1); padding-top:1.5rem;">
+        &copy; 2026 HealthPulse. Prototype Role-Based Demonstration.
+      </div>
+    </div>
+
+    <!-- RIGHT FORM -->
+    <div class="login-right-form">
+      
+      <div style="margin-bottom:1.5rem;">
+        <h3 style="font-family:'Outfit', sans-serif; font-size:1.5rem; font-weight:800; color:var(--login-navy); margin-bottom:0.35rem;">
+          Sign In to HealthPulse
+        </h3>
+        <p style="font-size:0.875rem; color:var(--login-text-muted);">
+          Choose your account type to access the platform.
+        </p>
+      </div>
+
+      <!-- ROLE SELECTOR TABS -->
+      <div class="role-tab-group">
+        <button class="role-tab-btn active" id="tab-role-public" data-role="public">Public User</button>
+        <button class="role-tab-btn" id="tab-role-pro" data-role="professional">Healthcare Professional</button>
+      </div>
+
+      <!-- DYNAMIC ROLE DESCRIPTION -->
+      <div id="role-description-box" style="font-size:0.85rem; color:var(--login-text-body); background:#eff6ff; padding:0.75rem 1rem; border-radius:10px; border:1px solid #bfdbfe; margin-bottom:1.25rem;">
+        Access outbreak awareness, health risk maps, disease trends, and prevention guidance.
+      </div>
+
+      <!-- ERROR ALERT -->
+      <div id="login-error-alert" style="display:none; font-size:0.875rem; color:#b91c1c; background:#fef2f2; border:1px solid #fecaca; padding:0.75rem 1rem; border-radius:10px; margin-bottom:1.25rem;">
+        Invalid username, password, or account type.
+      </div>
+
+      <!-- LOGIN FORM -->
+      <form id="login-form">
+        <div class="form-group">
+          <label for="login-username">Username</label>
+          <input type="text" id="login-username" class="form-input" placeholder="Enter username" required value="vinanti" />
+        </div>
+
+        <div class="form-group">
+          <label for="login-password">Password</label>
+          <input type="password" id="login-password" class="form-input" placeholder="Enter password" required value="pass@123" />
+        </div>
+
+        <button type="submit" class="btn-login-submit" style="margin-top:0.5rem;">
+          Sign In
+        </button>
+      </form>
+
+      <!-- DEMO CREDENTIALS BOX -->
+      <div class="demo-credentials-box">
+        <strong style="color:var(--login-text-heading); display:block; margin-bottom:4px;">Demo Credentials:</strong>
+        <div id="demo-creds-info" style="line-height:1.5;">
+          <strong>Public User:</strong> Username: <code style="color:#2563eb;">vinanti</code> | Password: <code style="color:#2563eb;">pass@123</code>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (typeof lucide !== 'undefined') lucide.createIcons();
+
+      let activeRole = 'public';
+
+      // Check URL parameters (e.g. ?role=professional)
+      const params = new URLSearchParams(window.location.search);
+      const urlRole = params.get('role');
+      if (urlRole === 'professional' || urlRole === 'pro') {
+        setRole('professional');
+      }
+
+      const tabPublic = document.getElementById('tab-role-public');
+      const tabPro = document.getElementById('tab-role-pro');
+      const usernameInput = document.getElementById('login-username');
+      const passwordInput = document.getElementById('login-password');
+      const descBox = document.getElementById('role-description-box');
+      const credsBox = document.getElementById('demo-creds-info');
+      const errorAlert = document.getElementById('login-error-alert');
+
+      function setRole(role) {
+        activeRole = role;
+        if (role === 'public') {
+          tabPublic.classList.add('active');
+          tabPro.classList.remove('active');
+          descBox.innerText = "Access outbreak awareness, health risk maps, disease trends, and prevention guidance.";
+          credsBox.innerHTML = `<strong>Public User:</strong> Username: <code style="color:#2563eb;">vinanti</code> | Password: <code style="color:#2563eb;">pass@123</code>`;
+          usernameInput.value = "vinanti";
+          passwordInput.value = "pass@123";
+        } else {
+          tabPro.classList.add('active');
+          tabPublic.classList.remove('active');
+          descBox.innerText = "Access advanced early warning scores (EWS), XAI feature weights, predictive ML models, and raw datasets.";
+          credsBox.innerHTML = `<strong>Professional:</strong> Username: <code style="color:#2563eb;">drsharma</code> | Password: <code style="color:#2563eb;">doctor@123</code>`;
+          usernameInput.value = "drsharma";
+          passwordInput.value = "doctor@123";
+        }
+        errorAlert.style.display = 'none';
+      }
+
+      tabPublic.addEventListener('click', () => setRole('public'));
+      tabPro.addEventListener('click', () => setRole('professional'));
+
+      document.getElementById('login-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const userVal = usernameInput.value;
+        const passVal = passwordInput.value;
+
+        const authObj = window.HealthPulseAuth || window.CodeAstraAuth;
+        const res = authObj.login(userVal, passVal, activeRole);
+        if (res.success) {
+          window.location.href = res.redirect;
+        } else {
+          errorAlert.innerText = res.message || "Invalid username, password, or account type.";
+          errorAlert.style.display = 'block';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

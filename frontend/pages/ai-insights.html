@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HealthPulse — AI Clinical Insights & Explainability</title>
+  <meta name="description" content="Explainable AI insights, feature attribution weights, and automated epidemiological reasoning.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/pages.css">
+</head>
+<body>
+
+  <div class="app-container">
+    
+    <!-- LEFT SIDEBAR NAVIGATION -->
+    <aside class="sidebar" id="sidebar">
+      <div>
+        <div class="sidebar-header">
+          <a href="../admin-overview.html" class="brand-logo-container">
+            <div class="brand-icon-wrapper">
+              <i data-lucide="radio"></i>
+            </div>
+            <div class="brand-text-wrapper">
+              <div class="brand-name">HealthPulse</div>
+              <div class="brand-subtitle">Health Intelligence Platform</div>
+            </div>
+          </a>
+          <button class="sidebar-collapse-btn" id="sidebar-collapse-btn" title="Toggle Navigation Rail">
+            <i data-lucide="chevron-left"></i>
+          </button>
+        </div>
+
+        <nav class="sidebar-nav-content">
+          <div class="nav-section-title">Dashboard</div>
+          <a href="../admin-overview.html" class="nav-item">
+            <i data-lucide="home"></i>
+            <span>Overview</span>
+          </a>
+
+          <div class="nav-section-title">Monitoring</div>
+          <a href="disease-trends.html" class="nav-item">
+            <i data-lucide="trending-up"></i>
+            <span>Disease Trends</span>
+          </a>
+          <a href="outbreaks.html" class="nav-item">
+            <i data-lucide="activity"></i>
+            <span>Outbreaks</span>
+          </a>
+          <a href="hotspots.html" class="nav-item">
+            <i data-lucide="map-pin"></i>
+            <span>Hotspots</span>
+          </a>
+
+          <div class="nav-section-title">Intelligence</div>
+          <a href="predictions.html" class="nav-item">
+            <i data-lucide="bar-chart-2"></i>
+            <span>Predictions</span>
+          </a>
+          <a href="early-warning.html" class="nav-item">
+            <i data-lucide="bell"></i>
+            <span>Early Warning</span>
+          </a>
+          <a href="ai-insights.html" class="nav-item active">
+            <i data-lucide="sparkles"></i>
+            <span>AI Insights</span>
+          </a>
+
+          <div class="nav-section-title">Data</div>
+          <a href="data-explorer.html" class="nav-item">
+            <i data-lucide="database"></i>
+            <span>Data Explorer</span>
+          </a>
+          <a href="historical.html" class="nav-item">
+            <i data-lucide="history"></i>
+            <span>Historical</span>
+          </a>
+
+          <div class="nav-section-title">System</div>
+          <a href="settings.html" class="nav-item">
+            <i data-lucide="settings"></i>
+            <span>Settings</span>
+          </a>
+          <a href="profile.html" class="nav-item">
+            <i data-lucide="user"></i>
+            <span>Profile</span>
+          </a>
+        </nav>
+      </div>
+
+      <div class="sidebar-footer">
+        <a href="profile.html" class="user-profile-card" style="text-decoration:none;">
+          <div class="avatar-badge-wrapper">
+            <div class="user-avatar">DS</div>
+            <span class="status-indicator-dot"></span>
+          </div>
+          <div class="user-info-text">
+            <div class="user-name">Dr. Sharma</div>
+            <div class="user-role">Healthcare Professional</div>
+          </div>
+        </a>
+        <div class="signout-action-btn">
+          <i data-lucide="log-out"></i>
+          <span>Sign Out</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN WRAPPER -->
+    <div class="main-wrapper">
+
+      <!-- TOP HEADER -->
+      <header class="top-header">
+        <div class="header-left-tools">
+          <div class="global-search-container">
+            <i data-lucide="search"></i>
+            <input type="text" id="global-search-input" class="global-search-input" placeholder="Search disease, region, or keyword..." />
+            <span class="kbd-shortcut">Ctrl K</span>
+          </div>
+        </div>
+
+        <div class="header-right-tools">
+          <div class="date-range-picker">
+            <i data-lucide="calendar"></i>
+            <span>Jan 1, 2023 – Dec 31, 2023</span>
+            <i data-lucide="chevron-down" style="width: 14px; height: 14px;"></i>
+          </div>
+
+          <div class="live-status-group">
+            <span id="live-time-ticker" class="live-clock-badge">10:42:18</span>
+            <div class="live-indicator-pill" id="live-indicator-pill">
+              <span class="pulse-dot"></span>
+              <span id="live-status-text">XAI Engine Online</span>
+            </div>
+          </div>
+
+          <button class="header-icon-btn" title="Surveillance Notifications">
+            <i data-lucide="bell"></i>
+            <span class="notification-badge"></span>
+          </button>
+
+          <a href="profile.html" class="header-user-avatar" style="text-decoration:none;">DS</a>
+        </div>
+      </header>
+
+      <!-- PAGE CONTENT -->
+      <main class="dashboard-content">
+
+        <!-- Page Header Banner -->
+        <div class="page-header-banner">
+          <div class="page-title-group">
+            <h1>Explainable AI (XAI) & Clinical Reasoning</h1>
+            <p>Interpretable machine-learning feature attributions and transparent risk driver decompositions.</p>
+          </div>
+          <div class="page-actions-group">
+            <button class="action-btn-primary" id="open-explainability-btn">
+              <i data-lucide="info" style="width: 14px; height: 14px;"></i>
+              <span>Open Factor Breakdown</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- AI Clinical Summary Quote Card -->
+        <div class="chart-card" style="margin-bottom: 20px;">
+          <div class="ai-quote-box" style="padding:18px 20px;">
+            <i data-lucide="sparkles" class="ai-sparkle-icon" style="width:24px; height:24px;"></i>
+            <div>
+              <div style="font-weight: 800; font-size: 1rem; color: var(--text-primary); margin-bottom: 4px;">
+                Automated Epidemiological Synthesis (Cycle 52)
+              </div>
+              <div class="ai-summary-text" style="font-size:0.92rem;">
+                Epidemic risk is accelerating in <strong>Gotham</strong> and <strong>Metropolis</strong>. Gotham's Dengue transmission velocity (+32.4% WoW) combined with an acute hospital surge (17.3% admission rate) accounts for 67.6% of the regional early warning score. Statistical anomaly deviation is confirmed at <strong>Z = 3.42</strong> (p &lt; 0.001).
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2 Column: Feature Attribution Weights & Clinical Action Recommendations -->
+        <div class="page-grid-2col">
+          
+          <div class="chart-card">
+            <div class="card-header-bar">
+              <div class="card-title">Supervised Feature Importance Weights</div>
+            </div>
+            <div id="feature-importance-chart" style="width: 100%; height: 320px; min-height: 320px;"></div>
+          </div>
+
+          <div class="chart-card">
+            <div class="card-header-bar">
+              <div class="card-title">Interpretable Risk Driver Cards</div>
+            </div>
+            
+            <div style="display:flex; flex-direction:column; gap:12px; font-size:0.84rem;">
+              <div style="padding:14px; background:#f8fafc; border-radius:var(--radius-md); border-left:3px solid var(--risk-critical);">
+                <div style="display:flex; justify-content:space-between; font-weight:700; color:var(--text-primary);">
+                  <span>Case Growth Velocity</span>
+                  <span style="color:var(--risk-critical);">Weight: 38.4%</span>
+                </div>
+                <div style="font-size:0.78rem; color:var(--text-muted); margin-top:3px;">
+                  3-week rolling growth (+32.4%) in Gotham exceeds the 99th percentile threshold.
+                </div>
+              </div>
+
+              <div style="padding:14px; background:#f8fafc; border-radius:var(--radius-md); border-left:3px solid var(--risk-high);">
+                <div style="display:flex; justify-content:space-between; font-weight:700; color:var(--text-primary);">
+                  <span>Statistical Anomaly Z-Score</span>
+                  <span style="color:var(--risk-high);">Weight: 29.2%</span>
+                </div>
+                <div style="font-size:0.78rem; color:var(--text-muted); margin-top:3px;">
+                  Z = 3.42 indicates severe departure from multi-year seasonal expectation.
+                </div>
+              </div>
+
+              <div style="padding:14px; background:#f8fafc; border-radius:var(--radius-md); border-left:3px solid var(--primary-blue);">
+                <div style="display:flex; justify-content:space-between; font-weight:700; color:var(--text-primary);">
+                  <span>Hospitalization Ratio Spike</span>
+                  <span style="color:var(--primary-blue);">Weight: 18.1%</span>
+                </div>
+                <div style="font-size:0.78rem; color:var(--text-muted); margin-top:3px;">
+                  74 acute admissions out of 428 cases (17.3% burden vs 11.2% regional normal).
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Explainability Modal -->
+  <div class="modal-backdrop" id="explainability-modal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div class="modal-title">Model Explainability & Risk Weighting</div>
+        <button class="modal-close-btn" id="close-modal-btn">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size:0.88rem; color:var(--text-secondary); line-height:1.5;">
+          The HealthPulse early warning score merges statistical anomaly deviation with trained supervised Random Forest feature weights to produce interpretable risk factor attributions.
+        </p>
+
+        <div class="xai-feature-row">
+          <div class="xai-feature-labels">
+            <span>Week-over-Week Case Growth Rate</span>
+            <span style="font-weight:700; color:var(--risk-critical);">Weight: 38.4% (Critical)</span>
+          </div>
+          <div class="xai-progress-track">
+            <div class="xai-progress-bar" style="width: 85%;"></div>
+          </div>
+        </div>
+
+        <div class="xai-feature-row">
+          <div class="xai-feature-labels">
+            <span>4-Week Rolling Z-Score Anomaly Deviation</span>
+            <span style="font-weight:700; color:var(--risk-critical);">Weight: 29.2% (Z = 3.42)</span>
+          </div>
+          <div class="xai-progress-track">
+            <div class="xai-progress-bar" style="width: 72%;"></div>
+          </div>
+        </div>
+
+        <div class="xai-feature-row">
+          <div class="xai-feature-labels">
+            <span>Hospitalization-to-Case Ratio</span>
+            <span style="font-weight:700; color:var(--risk-high);">Weight: 18.1% (Elevated)</span>
+          </div>
+          <div class="xai-progress-track">
+            <div class="xai-progress-bar" style="width: 54%;"></div>
+          </div>
+        </div>
+
+        <div class="xai-feature-row">
+          <div class="xai-feature-labels">
+            <span>Population Case Density (per 100k)</span>
+            <span style="font-weight:700; color:var(--risk-moderate);">Weight: 14.3% (Moderate)</span>
+          </div>
+          <div class="xai-progress-track">
+            <div class="xai-progress-bar" style="width: 40%;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+  <script src="../js/config.js"></script>
+  <script src="../js/shared.js"></script>
+  <script src="../js/pages/ai-insights.js"></script>
+</body>
+</html>

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HealthPulse — Hotspots & Spatial Intelligence</title>
+  <meta name="description" content="Dedicated geographic risk surveillance map, real-time hotspot clusters and regional vulnerability indexing.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Leaflet Map Stylesheet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/pages.css">
+</head>
+<body>
+
+  <div class="app-container">
+    
+    <!-- LEFT SIDEBAR NAVIGATION -->
+    <aside class="sidebar" id="sidebar">
+      <div>
+        <div class="sidebar-header">
+          <a href="../admin-overview.html" class="brand-logo-container">
+            <div class="brand-icon-wrapper">
+              <i data-lucide="radio"></i>
+            </div>
+            <div class="brand-text-wrapper">
+              <div class="brand-name">HealthPulse</div>
+              <div class="brand-subtitle">Health Intelligence Platform</div>
+            </div>
+          </a>
+          <button class="sidebar-collapse-btn" id="sidebar-collapse-btn" title="Toggle Navigation Rail">
+            <i data-lucide="chevron-left"></i>
+          </button>
+        </div>
+
+        <nav class="sidebar-nav-content">
+          <div class="nav-section-title">Dashboard</div>
+          <a href="../admin-overview.html" class="nav-item">
+            <i data-lucide="home"></i>
+            <span>Overview</span>
+          </a>
+
+          <div class="nav-section-title">Monitoring</div>
+          <a href="disease-trends.html" class="nav-item">
+            <i data-lucide="trending-up"></i>
+            <span>Disease Trends</span>
+          </a>
+          <a href="outbreaks.html" class="nav-item">
+            <i data-lucide="activity"></i>
+            <span>Outbreaks</span>
+          </a>
+          <a href="hotspots.html" class="nav-item active">
+            <i data-lucide="map-pin"></i>
+            <span>Hotspots</span>
+          </a>
+
+          <div class="nav-section-title">Intelligence</div>
+          <a href="predictions.html" class="nav-item">
+            <i data-lucide="bar-chart-2"></i>
+            <span>Predictions</span>
+          </a>
+          <a href="early-warning.html" class="nav-item">
+            <i data-lucide="bell"></i>
+            <span>Early Warning</span>
+          </a>
+          <a href="ai-insights.html" class="nav-item">
+            <i data-lucide="sparkles"></i>
+            <span>AI Insights</span>
+          </a>
+
+          <div class="nav-section-title">Data</div>
+          <a href="data-explorer.html" class="nav-item">
+            <i data-lucide="database"></i>
+            <span>Data Explorer</span>
+          </a>
+          <a href="historical.html" class="nav-item">
+            <i data-lucide="history"></i>
+            <span>Historical</span>
+          </a>
+
+          <div class="nav-section-title">System</div>
+          <a href="settings.html" class="nav-item">
+            <i data-lucide="settings"></i>
+            <span>Settings</span>
+          </a>
+          <a href="profile.html" class="nav-item">
+            <i data-lucide="user"></i>
+            <span>Profile</span>
+          </a>
+        </nav>
+      </div>
+
+      <div class="sidebar-footer">
+        <a href="profile.html" class="user-profile-card" style="text-decoration:none;">
+          <div class="avatar-badge-wrapper">
+            <div class="user-avatar">DS</div>
+            <span class="status-indicator-dot"></span>
+          </div>
+          <div class="user-info-text">
+            <div class="user-name">Dr. Sharma</div>
+            <div class="user-role">Healthcare Professional</div>
+          </div>
+        </a>
+        <div class="signout-action-btn">
+          <i data-lucide="log-out"></i>
+          <span>Sign Out</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN WRAPPER -->
+    <div class="main-wrapper">
+
+      <!-- TOP HEADER -->
+      <header class="top-header">
+        <div class="header-left-tools">
+          <div class="global-search-container">
+            <i data-lucide="search"></i>
+            <input type="text" id="global-search-input" class="global-search-input" placeholder="Search disease, region, or keyword..." />
+            <span class="kbd-shortcut">Ctrl K</span>
+          </div>
+        </div>
+
+        <div class="header-right-tools">
+          <div class="date-range-picker">
+            <i data-lucide="calendar"></i>
+            <span>Jan 1, 2023 – Dec 31, 2023</span>
+            <i data-lucide="chevron-down" style="width: 14px; height: 14px;"></i>
+          </div>
+
+          <div class="live-status-group">
+            <span id="live-time-ticker" class="live-clock-badge">10:42:18</span>
+            <div class="live-indicator-pill" id="live-indicator-pill">
+              <span class="pulse-dot"></span>
+              <span id="live-status-text">Geographic Stream Active</span>
+            </div>
+          </div>
+
+          <button class="header-icon-btn" title="Surveillance Notifications">
+            <i data-lucide="bell"></i>
+            <span class="notification-badge"></span>
+          </button>
+
+          <a href="profile.html" class="header-user-avatar" style="text-decoration:none;">DS</a>
+        </div>
+      </header>
+
+      <!-- PAGE CONTENT -->
+      <main class="dashboard-content">
+
+        <!-- Page Header Banner -->
+        <div class="page-header-banner">
+          <div class="page-title-group">
+            <h1>Geographic Risk & Hotspot Surveillance</h1>
+            <p>High-resolution spatial telemetry, disease cluster density, and municipal vulnerability mapping.</p>
+          </div>
+          <div class="page-actions-group">
+            <button class="action-btn-secondary" onclick="window.focusCity('Gotham')">
+              <i data-lucide="crosshair" style="width: 14px; height: 14px;"></i>
+              <span>Focus Critical Zone</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Fullscreen Map Container -->
+        <div class="chart-card" style="margin-bottom: 20px;">
+          <div class="card-header-bar">
+            <div class="card-title-group">
+              <div class="card-title">Metropolitan Surveillance Cluster Map</div>
+              <span class="live-stream-badge">
+                <span class="pulse-dot-sm"></span>
+                <span>OPENSTREETMAP TILE LAYER</span>
+              </span>
+            </div>
+            
+            <div class="card-controls-group">
+              <select class="custom-select" id="map-disease-filter">
+                <option value="All Diseases">All Diseases</option>
+                <option value="Influenza">Influenza</option>
+                <option value="Dengue">Dengue</option>
+                <option value="COVID-19">COVID-19</option>
+                <option value="Cholera">Cholera</option>
+                <option value="Typhoid">Typhoid</option>
+              </select>
+
+              <select class="custom-select" id="map-risk-filter">
+                <option value="All Risk Levels">All Risk Levels</option>
+                <option value="Critical">Critical</option>
+                <option value="High">High</option>
+                <option value="Moderate">Moderate</option>
+                <option value="Low">Low</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Leaflet Canvas -->
+          <div style="position: relative;">
+            <div class="map-live-overlay-badge">
+              <span class="pulse-dot-sm"></span>
+              <span>LIVE GEOGRAPHIC RISK OVERLAY</span>
+            </div>
+            <div id="fullscreen-risk-map" style="width: 100%; height: 440px; border-radius: var(--radius-md); overflow: hidden;"></div>
+          </div>
+
+          <!-- Legend Footer -->
+          <div class="map-legend-footer" style="margin-top: 12px;">
+            <div class="map-legend-item"><span class="legend-dot" style="background-color: var(--risk-low);"></span><span>Low (EWS < 30)</span></div>
+            <div class="map-legend-item"><span class="legend-dot" style="background-color: var(--risk-moderate);"></span><span>Moderate (31-60)</span></div>
+            <div class="map-legend-item"><span class="legend-dot" style="background-color: var(--risk-high);"></span><span>High (61-80)</span></div>
+            <div class="map-legend-item"><span class="legend-dot" style="background-color: var(--risk-critical);"></span><span>Critical (81-100)</span></div>
+            <div style="margin-left: auto; font-size: 0.72rem; color: var(--text-muted); font-weight: 600;">
+              Click city marker to inspect clinical telemetry
+            </div>
+          </div>
+        </div>
+
+        <!-- Regional Risk Intelligence Table -->
+        <div class="data-table-card">
+          <div class="table-toolbar">
+            <div style="font-weight: 800; font-size: 0.95rem; color: var(--text-primary);">
+              Monitored Municipal Risk Index
+            </div>
+          </div>
+
+          <table class="healthpulse-data-table">
+            <thead>
+              <tr>
+                <th>Region</th>
+                <th>Active Cases</th>
+                <th>Growth Rate</th>
+                <th>Hospitalizations</th>
+                <th>EWS Score</th>
+                <th>Risk Tier</th>
+                <th>Dominant Pathogen</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="hotspots-table-body"></tbody>
+          </table>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="../js/config.js"></script>
+  <script src="../js/shared.js"></script>
+  <script src="../js/pages/hotspots.js"></script>
+</body>
+</html>

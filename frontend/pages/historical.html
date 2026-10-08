@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HealthPulse — Historical & Seasonality Analytics</title>
+  <meta name="description" content="Multi-year epidemiological comparisons, cross-cycle disease baselines, and historical seasonality trends.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/pages.css">
+</head>
+<body>
+
+  <div class="app-container">
+    
+    <!-- LEFT SIDEBAR NAVIGATION -->
+    <aside class="sidebar" id="sidebar">
+      <div>
+        <div class="sidebar-header">
+          <a href="../admin-overview.html" class="brand-logo-container">
+            <div class="brand-icon-wrapper">
+              <i data-lucide="radio"></i>
+            </div>
+            <div class="brand-text-wrapper">
+              <div class="brand-name">HealthPulse</div>
+              <div class="brand-subtitle">Health Intelligence Platform</div>
+            </div>
+          </a>
+          <button class="sidebar-collapse-btn" id="sidebar-collapse-btn" title="Toggle Navigation Rail">
+            <i data-lucide="chevron-left"></i>
+          </button>
+        </div>
+
+        <nav class="sidebar-nav-content">
+          <div class="nav-section-title">Dashboard</div>
+          <a href="../admin-overview.html" class="nav-item">
+            <i data-lucide="home"></i>
+            <span>Overview</span>
+          </a>
+
+          <div class="nav-section-title">Monitoring</div>
+          <a href="disease-trends.html" class="nav-item">
+            <i data-lucide="trending-up"></i>
+            <span>Disease Trends</span>
+          </a>
+          <a href="outbreaks.html" class="nav-item">
+            <i data-lucide="activity"></i>
+            <span>Outbreaks</span>
+          </a>
+          <a href="hotspots.html" class="nav-item">
+            <i data-lucide="map-pin"></i>
+            <span>Hotspots</span>
+          </a>
+
+          <div class="nav-section-title">Intelligence</div>
+          <a href="predictions.html" class="nav-item">
+            <i data-lucide="bar-chart-2"></i>
+            <span>Predictions</span>
+          </a>
+          <a href="early-warning.html" class="nav-item">
+            <i data-lucide="bell"></i>
+            <span>Early Warning</span>
+          </a>
+          <a href="ai-insights.html" class="nav-item">
+            <i data-lucide="sparkles"></i>
+            <span>AI Insights</span>
+          </a>
+
+          <div class="nav-section-title">Data</div>
+          <a href="data-explorer.html" class="nav-item">
+            <i data-lucide="database"></i>
+            <span>Data Explorer</span>
+          </a>
+          <a href="historical.html" class="nav-item active">
+            <i data-lucide="history"></i>
+            <span>Historical</span>
+          </a>
+
+          <div class="nav-section-title">System</div>
+          <a href="settings.html" class="nav-item">
+            <i data-lucide="settings"></i>
+            <span>Settings</span>
+          </a>
+          <a href="profile.html" class="nav-item">
+            <i data-lucide="user"></i>
+            <span>Profile</span>
+          </a>
+        </nav>
+      </div>
+
+      <div class="sidebar-footer">
+        <a href="profile.html" class="user-profile-card" style="text-decoration:none;">
+          <div class="avatar-badge-wrapper">
+            <div class="user-avatar">DS</div>
+            <span class="status-indicator-dot"></span>
+          </div>
+          <div class="user-info-text">
+            <div class="user-name">Dr. Sharma</div>
+            <div class="user-role">Healthcare Professional</div>
+          </div>
+        </a>
+        <div class="signout-action-btn">
+          <i data-lucide="log-out"></i>
+          <span>Sign Out</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN WRAPPER -->
+    <div class="main-wrapper">
+
+      <!-- TOP HEADER -->
+      <header class="top-header">
+        <div class="header-left-tools">
+          <div class="global-search-container">
+            <i data-lucide="search"></i>
+            <input type="text" id="global-search-input" class="global-search-input" placeholder="Search disease, region, or keyword..." />
+            <span class="kbd-shortcut">Ctrl K</span>
+          </div>
+        </div>
+
+        <div class="header-right-tools">
+          <div class="date-range-picker">
+            <i data-lucide="calendar"></i>
+            <span>2022 Baseline vs. 2023 Current</span>
+            <i data-lucide="chevron-down" style="width: 14px; height: 14px;"></i>
+          </div>
+
+          <div class="live-status-group">
+            <span id="live-time-ticker" class="live-clock-badge">10:42:18</span>
+            <div class="live-indicator-pill" id="live-indicator-pill">
+              <span class="pulse-dot"></span>
+              <span id="live-status-text">Comparative Engine</span>
+            </div>
+          </div>
+
+          <button class="header-icon-btn" title="Surveillance Notifications">
+            <i data-lucide="bell"></i>
+            <span class="notification-badge"></span>
+          </button>
+
+          <a href="profile.html" class="header-user-avatar" style="text-decoration:none;">DS</a>
+        </div>
+      </header>
+
+      <!-- PAGE CONTENT -->
+      <main class="dashboard-content">
+
+        <!-- Page Header Banner -->
+        <div class="page-header-banner">
+          <div class="page-title-group">
+            <h1>Historical Baseline & Year-over-Year Analytics</h1>
+            <p>Comparative disease trajectory analysis contrasting the 2022 historical baseline with current 2023 surveillance data.</p>
+          </div>
+        </div>
+
+        <!-- Historical Metrics Strip -->
+        <div class="forecast-summary-strip">
+          <div class="forecast-metric-card">
+            <div class="f-label">YoY Total Cases Growth</div>
+            <div class="f-val" style="color:var(--risk-critical);">+22.3%</div>
+            <div class="f-sub" style="color:var(--risk-critical); font-weight:700;">12,482 (2023) vs 10,210 (2022)</div>
+          </div>
+
+          <div class="forecast-metric-card">
+            <div class="f-label">Hospitalization Rate Surge</div>
+            <div class="f-val" style="color:var(--risk-high);">+14.7%</div>
+            <div class="f-sub" style="color:var(--risk-high); font-weight:700;">1,840 (2023) vs 1,604 (2022)</div>
+          </div>
+
+          <div class="forecast-metric-card">
+            <div class="f-label">Active Outbreak Incidents</div>
+            <div class="f-val" style="color:var(--risk-critical);">+3 Events</div>
+            <div class="f-sub" style="color:var(--risk-critical); font-weight:700;">8 Outbreaks (2023) vs 5 (2022)</div>
+          </div>
+
+          <div class="forecast-metric-card">
+            <div class="f-label">Primary Surge Pathogen</div>
+            <div class="f-val" style="color:var(--primary-blue);">Dengue</div>
+            <div class="f-sub" style="color:var(--text-muted);">+56.5% Increase YoY</div>
+          </div>
+        </div>
+
+        <!-- Main Comparative Chart -->
+        <div class="chart-card" style="margin-bottom: 20px;">
+          <div class="card-header-bar">
+            <div class="card-title">Cross-Year Pathogen Burden Comparison (2022 vs 2023)</div>
+            <div style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">Simulated Historical Comparison Data</div>
+          </div>
+
+          <div id="hist-comparison-barchart" style="width: 100%; height: 350px; min-height: 350px;"></div>
+        </div>
+
+        <!-- Secondary Chart: Seasonality Comparison -->
+        <div class="chart-card">
+          <div class="card-header-bar">
+            <div class="card-title">Monthly Seasonality Trajectory (Jan – Dec)</div>
+          </div>
+
+          <div id="hist-seasonality-chart" style="width: 100%; height: 300px; min-height: 300px;"></div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+  <script src="../js/config.js"></script>
+  <script src="../js/shared.js"></script>
+  <script src="../js/pages/historical.js"></script>
+</body>
+</html>
